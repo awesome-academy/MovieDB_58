@@ -56,15 +56,55 @@
 		DF464BB827FAD79F004310C8 /* NetflixClone */ = {
 			isa = PBXGroup;
 			children = (
-				DF464BB927FAD7A0004310C8 /* AppDelegate.swift */,
-				DF464BBB27FAD7A0004310C8 /* SceneDelegate.swift */,
-				DF464BBD27FAD7A0004310C8 /* ViewController.swift */,
-				DF464BBF27FAD7A0004310C8 /* Main.storyboard */,
-				DF464BC227FAD7A5004310C8 /* Assets.xcassets */,
-				DF464BC427FAD7A5004310C8 /* LaunchScreen.storyboard */,
+				DF4B11FA27FBCBA300DC1B76 /* Models */,
+				DF4B11FB27FBCBAC00DC1B76 /* Views */,
+				DF4B11FC27FBCBB600DC1B76 /* Controllers */,
+				DF4B11FE27FBCBD300DC1B76 /* Resources */,
+				DF4B11FD27FBCBCA00DC1B76 /* AppDelegates */,
 				DF464BC727FAD7A5004310C8 /* Info.plist */,
 			);
 			path = NetflixClone;
+			sourceTree = "<group>";
+		};
+		DF4B11FA27FBCBA300DC1B76 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DF4B11FB27FBCBAC00DC1B76 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DF464BBF27FAD7A0004310C8 /* Main.storyboard */,
+				DF464BC427FAD7A5004310C8 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DF4B11FC27FBCBB600DC1B76 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DF464BBD27FAD7A0004310C8 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		DF4B11FD27FBCBCA00DC1B76 /* AppDelegates */ = {
+			isa = PBXGroup;
+			children = (
+				DF464BB927FAD7A0004310C8 /* AppDelegate.swift */,
+				DF464BBB27FAD7A0004310C8 /* SceneDelegate.swift */,
+			);
+			path = AppDelegates;
+			sourceTree = "<group>";
+		};
+		DF4B11FE27FBCBD300DC1B76 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DF464BC227FAD7A5004310C8 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,6 +114,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DF464BCA27FAD7A5004310C8 /* Build configuration list for PBXNativeTarget "NetflixClone" */;
 			buildPhases = (
+				DF4B11F927FBCA9000DC1B76 /* Run Swiftlint */,
 				DF464BB227FAD79F004310C8 /* Sources */,
 				DF464BB327FAD79F004310C8 /* Frameworks */,
 				DF464BB427FAD79F004310C8 /* Resources */,
@@ -132,6 +173,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DF4B11F927FBCA9000DC1B76 /* Run Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Swiftlint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DF464BB227FAD79F004310C8 /* Sources */ = {
