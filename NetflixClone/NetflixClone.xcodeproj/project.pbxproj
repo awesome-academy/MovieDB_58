@@ -12,9 +12,25 @@
 		DF464BC127FAD7A0004310C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF464BBF27FAD7A0004310C8 /* Main.storyboard */; };
 		DF464BC327FAD7A5004310C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF464BC227FAD7A5004310C8 /* Assets.xcassets */; };
 		DF464BC627FAD7A5004310C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF464BC427FAD7A5004310C8 /* LaunchScreen.storyboard */; };
+		DF49F12627FC3A6E00628E79 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49F12527FC3A6E00628E79 /* MovieDetail.swift */; };
+		DF49F12827FC3B1D00628E79 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49F12727FC3B1D00628E79 /* Genre.swift */; };
+		DF49F12A27FD1C6600628E79 /* TvDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49F12927FD1C6600628E79 /* TvDetail.swift */; };
+		DF49F12C27FD1E1900628E79 /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49F12B27FD1E1900628E79 /* Cast.swift */; };
+		DF49F12E27FD254800628E79 /* Crew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49F12D27FD254800628E79 /* Crew.swift */; };
+		DF49F13027FD284600628E79 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49F12F27FD284600628E79 /* Network.swift */; };
+		DF49F13227FD457100628E79 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49F13127FD457100628E79 /* Season.swift */; };
+		DF49F13427FD45A900628E79 /* LastEpisodeToAir.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49F13327FD45A900628E79 /* LastEpisodeToAir.swift */; };
+		DF49F13627FD4C8400628E79 /* CreatedBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49F13527FD4C8400628E79 /* CreatedBy.swift */; };
+		DF49F13A27FD8BED00628E79 /* ManageURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49F13927FD8BED00628E79 /* ManageURL.swift */; };
+		DF49F13C27FE6CD100628E79 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49F13B27FE6CD100628E79 /* Constants.swift */; };
+		DF49F14027FE722A00628E79 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = DF49F13F27FE722A00628E79 /* Keys.plist */; };
+		DF49F14227FE8A4700628E79 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49F14127FE8A4700628E79 /* Enums.swift */; };
+		DF49F14427FE90FA00628E79 /* APIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49F14327FE90FA00628E79 /* APIRepository.swift */; };
 		DF6E512127FBEE59001FF8D8 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6E512027FBEE59001FF8D8 /* HomeTableViewController.swift */; };
 		DF6E512327FBEE6E001FF8D8 /* ComingSoonTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6E512227FBEE6E001FF8D8 /* ComingSoonTableViewController.swift */; };
 		DF6E512527FBEE82001FF8D8 /* MyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6E512427FBEE82001FF8D8 /* MyListTableViewController.swift */; };
+		DF6E512827FC18D1001FF8D8 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6E512727FC18D1001FF8D8 /* APICaller.swift */; };
+		DFBF496927FC231200140F00 /* ListedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF496827FC231200140F00 /* ListedItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,9 +41,25 @@
 		DF464BC227FAD7A5004310C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DF464BC527FAD7A5004310C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DF464BC727FAD7A5004310C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF49F12527FC3A6E00628E79 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
+		DF49F12727FC3B1D00628E79 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		DF49F12927FD1C6600628E79 /* TvDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvDetail.swift; sourceTree = "<group>"; };
+		DF49F12B27FD1E1900628E79 /* Cast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
+		DF49F12D27FD254800628E79 /* Crew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crew.swift; sourceTree = "<group>"; };
+		DF49F12F27FD284600628E79 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		DF49F13127FD457100628E79 /* Season.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
+		DF49F13327FD45A900628E79 /* LastEpisodeToAir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastEpisodeToAir.swift; sourceTree = "<group>"; };
+		DF49F13527FD4C8400628E79 /* CreatedBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatedBy.swift; sourceTree = "<group>"; };
+		DF49F13927FD8BED00628E79 /* ManageURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageURL.swift; sourceTree = "<group>"; };
+		DF49F13B27FE6CD100628E79 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		DF49F13F27FE722A00628E79 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		DF49F14127FE8A4700628E79 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		DF49F14327FE90FA00628E79 /* APIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRepository.swift; sourceTree = "<group>"; };
 		DF6E512027FBEE59001FF8D8 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		DF6E512227FBEE6E001FF8D8 /* ComingSoonTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComingSoonTableViewController.swift; sourceTree = "<group>"; };
 		DF6E512427FBEE82001FF8D8 /* MyListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListTableViewController.swift; sourceTree = "<group>"; };
+		DF6E512727FC18D1001FF8D8 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		DFBF496827FC231200140F00 /* ListedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListedItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +92,7 @@
 		DF464BB827FAD79F004310C8 /* NetflixClone */ = {
 			isa = PBXGroup;
 			children = (
+				DF6E512627FC1885001FF8D8 /* Networking */,
 				DF4B11FA27FBCBA300DC1B76 /* Models */,
 				DF4B11FB27FBCBAC00DC1B76 /* Views */,
 				DF4B11FC27FBCBB600DC1B76 /* Controllers */,
@@ -73,6 +106,16 @@
 		DF4B11FA27FBCBA300DC1B76 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DFBF496827FC231200140F00 /* ListedItem.swift */,
+				DF49F12527FC3A6E00628E79 /* MovieDetail.swift */,
+				DF49F12927FD1C6600628E79 /* TvDetail.swift */,
+				DF49F12727FC3B1D00628E79 /* Genre.swift */,
+				DF49F12B27FD1E1900628E79 /* Cast.swift */,
+				DF49F12D27FD254800628E79 /* Crew.swift */,
+				DF49F12F27FD284600628E79 /* Network.swift */,
+				DF49F13127FD457100628E79 /* Season.swift */,
+				DF49F13327FD45A900628E79 /* LastEpisodeToAir.swift */,
+				DF49F13527FD4C8400628E79 /* CreatedBy.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -109,8 +152,21 @@
 			isa = PBXGroup;
 			children = (
 				DF464BC227FAD7A5004310C8 /* Assets.xcassets */,
+				DF49F13F27FE722A00628E79 /* Keys.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		DF6E512627FC1885001FF8D8 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				DF49F13927FD8BED00628E79 /* ManageURL.swift */,
+				DF6E512727FC18D1001FF8D8 /* APICaller.swift */,
+				DF49F14327FE90FA00628E79 /* APIRepository.swift */,
+				DF49F13B27FE6CD100628E79 /* Constants.swift */,
+				DF49F14127FE8A4700628E79 /* Enums.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +228,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF49F14027FE722A00628E79 /* Keys.plist in Resources */,
 				DF464BC627FAD7A5004310C8 /* LaunchScreen.storyboard in Resources */,
 				DF464BC327FAD7A5004310C8 /* Assets.xcassets in Resources */,
 				DF464BC127FAD7A0004310C8 /* Main.storyboard in Resources */,
@@ -206,11 +263,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF49F13027FD284600628E79 /* Network.swift in Sources */,
+				DF49F13A27FD8BED00628E79 /* ManageURL.swift in Sources */,
+				DF49F13427FD45A900628E79 /* LastEpisodeToAir.swift in Sources */,
+				DF49F12827FC3B1D00628E79 /* Genre.swift in Sources */,
 				DF6E512127FBEE59001FF8D8 /* HomeTableViewController.swift in Sources */,
+				DF49F12E27FD254800628E79 /* Crew.swift in Sources */,
+				DF6E512827FC18D1001FF8D8 /* APICaller.swift in Sources */,
+				DFBF496927FC231200140F00 /* ListedItem.swift in Sources */,
+				DF49F14427FE90FA00628E79 /* APIRepository.swift in Sources */,
 				DF6E512327FBEE6E001FF8D8 /* ComingSoonTableViewController.swift in Sources */,
 				DF6E512527FBEE82001FF8D8 /* MyListTableViewController.swift in Sources */,
 				DF464BBA27FAD7A0004310C8 /* AppDelegate.swift in Sources */,
 				DF464BBC27FAD7A0004310C8 /* SceneDelegate.swift in Sources */,
+				DF49F12C27FD1E1900628E79 /* Cast.swift in Sources */,
+				DF49F12A27FD1C6600628E79 /* TvDetail.swift in Sources */,
+				DF49F13627FD4C8400628E79 /* CreatedBy.swift in Sources */,
+				DF49F13227FD457100628E79 /* Season.swift in Sources */,
+				DF49F12627FC3A6E00628E79 /* MovieDetail.swift in Sources */,
+				DF49F13C27FE6CD100628E79 /* Constants.swift in Sources */,
+				DF49F14227FE8A4700628E79 /* Enums.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +432,7 @@
 				DEVELOPMENT_TEAM = QW4XF2Y493;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NetflixClone/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -388,6 +461,7 @@
 				DEVELOPMENT_TEAM = QW4XF2Y493;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NetflixClone/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
