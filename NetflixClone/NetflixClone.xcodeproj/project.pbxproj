@@ -26,6 +26,10 @@
 		DF49F14027FE722A00628E79 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = DF49F13F27FE722A00628E79 /* Keys.plist */; };
 		DF49F14227FE8A4700628E79 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49F14127FE8A4700628E79 /* Enums.swift */; };
 		DF49F14427FE90FA00628E79 /* APIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49F14327FE90FA00628E79 /* APIRepository.swift */; };
+		DF49F14627FEDE3300628E79 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49F14527FEDE3300628E79 /* HomeTableViewCell.swift */; };
+		DF49F14927FEE83000628E79 /* SectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49F14727FEE83000628E79 /* SectionHeaderCell.swift */; };
+		DF49F14A27FEE83000628E79 /* SectionHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF49F14827FEE83000628E79 /* SectionHeaderCell.xib */; };
+		DF5A843927FFD1BE00FFA85F /* ReuseableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5A843827FFD1BE00FFA85F /* ReuseableView.swift */; };
 		DF6E512127FBEE59001FF8D8 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6E512027FBEE59001FF8D8 /* HomeTableViewController.swift */; };
 		DF6E512327FBEE6E001FF8D8 /* ComingSoonTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6E512227FBEE6E001FF8D8 /* ComingSoonTableViewController.swift */; };
 		DF6E512527FBEE82001FF8D8 /* MyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6E512427FBEE82001FF8D8 /* MyListTableViewController.swift */; };
@@ -55,6 +59,10 @@
 		DF49F13F27FE722A00628E79 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		DF49F14127FE8A4700628E79 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		DF49F14327FE90FA00628E79 /* APIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRepository.swift; sourceTree = "<group>"; };
+		DF49F14527FEDE3300628E79 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		DF49F14727FEE83000628E79 /* SectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderCell.swift; sourceTree = "<group>"; };
+		DF49F14827FEE83000628E79 /* SectionHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeaderCell.xib; sourceTree = "<group>"; };
+		DF5A843827FFD1BE00FFA85F /* ReuseableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseableView.swift; sourceTree = "<group>"; };
 		DF6E512027FBEE59001FF8D8 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		DF6E512227FBEE6E001FF8D8 /* ComingSoonTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComingSoonTableViewController.swift; sourceTree = "<group>"; };
 		DF6E512427FBEE82001FF8D8 /* MyListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListTableViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +104,7 @@
 				DF4B11FA27FBCBA300DC1B76 /* Models */,
 				DF4B11FB27FBCBAC00DC1B76 /* Views */,
 				DF4B11FC27FBCBB600DC1B76 /* Controllers */,
+				DF5A843727FFD1A000FFA85F /* Ultilities */,
 				DF4B11FE27FBCBD300DC1B76 /* Resources */,
 				DF4B11FD27FBCBCA00DC1B76 /* AppDelegates */,
 				DF464BC727FAD7A5004310C8 /* Info.plist */,
@@ -125,6 +134,9 @@
 			children = (
 				DF464BBF27FAD7A0004310C8 /* Main.storyboard */,
 				DF464BC427FAD7A5004310C8 /* LaunchScreen.storyboard */,
+				DF49F14527FEDE3300628E79 /* HomeTableViewCell.swift */,
+				DF49F14727FEE83000628E79 /* SectionHeaderCell.swift */,
+				DF49F14827FEE83000628E79 /* SectionHeaderCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -155,6 +167,14 @@
 				DF49F13F27FE722A00628E79 /* Keys.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		DF5A843727FFD1A000FFA85F /* Ultilities */ = {
+			isa = PBXGroup;
+			children = (
+				DF5A843827FFD1BE00FFA85F /* ReuseableView.swift */,
+			);
+			path = Ultilities;
 			sourceTree = "<group>";
 		};
 		DF6E512627FC1885001FF8D8 /* Networking */ = {
@@ -229,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF49F14027FE722A00628E79 /* Keys.plist in Resources */,
+				DF49F14A27FEE83000628E79 /* SectionHeaderCell.xib in Resources */,
 				DF464BC627FAD7A5004310C8 /* LaunchScreen.storyboard in Resources */,
 				DF464BC327FAD7A5004310C8 /* Assets.xcassets in Resources */,
 				DF464BC127FAD7A0004310C8 /* Main.storyboard in Resources */,
@@ -264,14 +285,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF49F13027FD284600628E79 /* Network.swift in Sources */,
+				DF5A843927FFD1BE00FFA85F /* ReuseableView.swift in Sources */,
 				DF49F13A27FD8BED00628E79 /* ManageURL.swift in Sources */,
 				DF49F13427FD45A900628E79 /* LastEpisodeToAir.swift in Sources */,
 				DF49F12827FC3B1D00628E79 /* Genre.swift in Sources */,
 				DF6E512127FBEE59001FF8D8 /* HomeTableViewController.swift in Sources */,
 				DF49F12E27FD254800628E79 /* Crew.swift in Sources */,
+				DF49F14927FEE83000628E79 /* SectionHeaderCell.swift in Sources */,
 				DF6E512827FC18D1001FF8D8 /* APICaller.swift in Sources */,
 				DFBF496927FC231200140F00 /* ListedItem.swift in Sources */,
 				DF49F14427FE90FA00628E79 /* APIRepository.swift in Sources */,
+				DF49F14627FEDE3300628E79 /* HomeTableViewCell.swift in Sources */,
 				DF6E512327FBEE6E001FF8D8 /* ComingSoonTableViewController.swift in Sources */,
 				DF6E512527FBEE82001FF8D8 /* MyListTableViewController.swift in Sources */,
 				DF464BBA27FAD7A0004310C8 /* AppDelegate.swift in Sources */,
@@ -436,6 +460,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -465,6 +490,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
