@@ -1,6 +1,6 @@
 import UIKit
 
-class CategoryTableViewCell: UITableViewCell {
+final class CategoryTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

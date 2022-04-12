@@ -42,6 +42,9 @@
 		DFBF496927FC231200140F00 /* ListedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF496827FC231200140F00 /* ListedItem.swift */; };
 		DFE6E1C4280445020025D737 /* NotificationCenterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6E1C3280445020025D737 /* NotificationCenterExtension.swift */; };
 		DFE6E1CD28044E440025D737 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6E1CC28044E440025D737 /* CategoryTableViewCell.swift */; };
+		DFE6E1D32805218F0025D737 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6E1D12805218F0025D737 /* ListCollectionViewCell.swift */; };
+		DFE6E1D42805218F0025D737 /* ListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFE6E1D22805218F0025D737 /* ListCollectionViewCell.xib */; };
+		DFE6E1D628056D3A0025D737 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6E1D528056D3A0025D737 /* ImageCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +85,9 @@
 		DFBF496827FC231200140F00 /* ListedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListedItem.swift; sourceTree = "<group>"; };
 		DFE6E1C3280445020025D737 /* NotificationCenterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterExtension.swift; sourceTree = "<group>"; };
 		DFE6E1CC28044E440025D737 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
+		DFE6E1D12805218F0025D737 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
+		DFE6E1D22805218F0025D737 /* ListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCollectionViewCell.xib; sourceTree = "<group>"; };
+		DFE6E1D528056D3A0025D737 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				DF5A843827FFD1BE00FFA85F /* ReuseableView.swift */,
+				DFE6E1D528056D3A0025D737 /* ImageCache.swift */,
 			);
 			path = Ultilities;
 			sourceTree = "<group>";
@@ -270,6 +277,8 @@
 				DF49F14727FEE83000628E79 /* SectionHeaderCell.swift */,
 				DF49F14827FEE83000628E79 /* SectionHeaderCell.xib */,
 				DF49F14527FEDE3300628E79 /* HomeTableViewCell.swift */,
+				DFE6E1D12805218F0025D737 /* ListCollectionViewCell.swift */,
+				DFE6E1D22805218F0025D737 /* ListCollectionViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -351,6 +360,7 @@
 			files = (
 				DF49F14027FE722A00628E79 /* Keys.plist in Resources */,
 				DF49F14A27FEE83000628E79 /* SectionHeaderCell.xib in Resources */,
+				DFE6E1D42805218F0025D737 /* ListCollectionViewCell.xib in Resources */,
 				DF464BC627FAD7A5004310C8 /* LaunchScreen.storyboard in Resources */,
 				DF464BC327FAD7A5004310C8 /* Assets.xcassets in Resources */,
 				DF464BC127FAD7A0004310C8 /* Main.storyboard in Resources */,
@@ -387,6 +397,7 @@
 			files = (
 				DF49F13027FD284600628E79 /* Network.swift in Sources */,
 				DF5A843927FFD1BE00FFA85F /* ReuseableView.swift in Sources */,
+				DFE6E1D628056D3A0025D737 /* ImageCache.swift in Sources */,
 				DF49F13A27FD8BED00628E79 /* ManageURL.swift in Sources */,
 				DFE6E1C4280445020025D737 /* NotificationCenterExtension.swift in Sources */,
 				DF49F13427FD45A900628E79 /* LastEpisodeToAir.swift in Sources */,
@@ -406,6 +417,7 @@
 				DF3E284A280031BB006DC5B9 /* CategoryViewController.swift in Sources */,
 				DF464BBA27FAD7A0004310C8 /* AppDelegate.swift in Sources */,
 				DF464BBC27FAD7A0004310C8 /* SceneDelegate.swift in Sources */,
+				DFE6E1D32805218F0025D737 /* ListCollectionViewCell.swift in Sources */,
 				DF49F12C27FD1E1900628E79 /* Cast.swift in Sources */,
 				DF49F12A27FD1C6600628E79 /* TvDetail.swift in Sources */,
 				DF49F13627FD4C8400628E79 /* CreatedBy.swift in Sources */,

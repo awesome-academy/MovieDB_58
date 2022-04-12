@@ -1,7 +1,7 @@
 import Foundation
 
 struct ListedItems: Codable {
-    let results: [ListedItem]
+    var results: [ListedItem]
 }
 
 struct ListedItem: Codable {

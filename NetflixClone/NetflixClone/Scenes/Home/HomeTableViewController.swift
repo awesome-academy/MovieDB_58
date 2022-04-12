@@ -6,12 +6,21 @@ final class HomeTableViewController: UITableViewController {
     @IBOutlet private weak var tvShowButton: UIButton?
     @IBOutlet private weak var movieButton: UIButton?
     @IBOutlet private weak var categoriesButton: UIButton?
-    private let sectionTitles = ["My List", "Trending", "Popular Movie", "Popular TV Shows", "Up Coming"]
+    @IBOutlet weak var headerTitle: UILabel?
+    @IBOutlet weak var headerGenres: UILabel?
+    
+    private let sectionTitles = ["My List", "Trending", "Popular Movie", "Popular TV Show"]
     private var movieEnabled = true
     private var tvShowEnabled = true
     private var headerItemId = 0
     private var headerItemIsMovie = true
     private var headerInMyList = false
+    private var myList = [ListedItem]()
+    private var trendingList = [ListedItem]()
+    private var popularMovieList = [ListedItem]()
+    private var popularTvshowList = [ListedItem]()
+    private var movieGenres = [Genre]()
+    private var tvGenres = [Genre]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +33,7 @@ final class HomeTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setUpNavigationBar()
         makePillShapedButton()
     }
@@ -36,17 +46,38 @@ final class HomeTableViewController: UITableViewController {
         DispatchQueue.global(qos: .utility).async { [weak self] in
             let apiRepo = APIRepository()
             let thisVC = self ?? UITableViewController()
+            guard let self = self else { return }
             let group = DispatchGroup()
             // Start fetching
             group.enter()
-            apiRepo.getList(listType: .trending, mediaType: .all, viewController: thisVC)
-            apiRepo.getGenre(mediaType: .tvShow, viewController: thisVC)
-            apiRepo.getGenre(mediaType: .movie, viewController: thisVC)
-            group.leave()
-            group.wait()
+            apiRepo.getList(listType: .trending, mediaType: .all, viewController: thisVC) {(listedArray: ListedItems) in
+                self.trendingList.append(contentsOf: listedArray.results)
+                group.leave()
+            }
+            group.enter()
+            apiRepo.getList(listType: .popular, mediaType: .movie, viewController: thisVC) {(listedArray: ListedItems) in
+                self.popularMovieList.append(contentsOf: listedArray.results)
+                group.leave()
+            }
+            group.enter()
+            apiRepo.getList(listType: .popular, mediaType: .tvShow, viewController: thisVC) {(listedArray: ListedItems) in
+                self.popularTvshowList.append(contentsOf: listedArray.results)
+                group.leave()
+            }
+            group.enter()
+            apiRepo.getGenre(mediaType: .tvShow, viewController: thisVC) {(genresArray: Genres) in
+                self.tvGenres.append(contentsOf: genresArray.genres)
+                group.leave()
+            }
+            group.enter()
+            apiRepo.getGenre(mediaType: .movie, viewController: thisVC) {(genresArray: Genres) in
+                self.movieGenres.append(contentsOf: genresArray.genres)
+                group.leave()
+            }
             // Update UI
             group.notify(queue: .main) {
-                self?.tableView.reloadData()
+                self.configHeaderItem(apiRepo: apiRepo)
+                self.tableView.reloadData()
                 print("Fetching is done!")
             }
         }
@@ -72,6 +103,60 @@ final class HomeTableViewController: UITableViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
+    private func configHeaderItem(apiRepo: APIRepository) {
+        var headerGenresString = ""
+        var headerGenresArray = [String]()
+        // Header image
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            guard let self = self else { return }
+            guard let imageURL = self.trendingList[0].posterPath else { return }
+            apiRepo.getImage(url: imageURL) { (result: Result<Data, Error>) in
+                switch result {
+                case .success(let imageData):
+                    if let image = UIImage(data: imageData) {
+                        DispatchQueue.main.async {
+                            self.tableHeaderImageView?.image = image
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.tableHeaderImageView?.image = UIImage(named: "placeHolder")
+                        }
+                    }
+                case .failure(let error):
+                    print("Error: \(error)")
+                }
+            }
+        }
+        // Header Info
+        headerTitle?.text = self.trendingList[0].name?.uppercased() ?? self.trendingList[0].title?.uppercased()
+        headerGenresArray = getHeaderGenres()
+        headerGenresString = headerGenresArray.joined(separator: " • ")
+        headerGenres?.text = headerGenresString
+    }
+
+    private func getHeaderGenres() -> [String] {
+        guard let genresId = trendingList[0].genreIDs else { return [String]() }
+        var returnArray = [String]()
+        if trendingList[0].name == nil || trendingList[0].originalName == nil {
+            _ = genresId.map { genreId in
+                movieGenres.map { movieGenre in
+                    if genreId == movieGenre.id {
+                        returnArray.append(movieGenre.name ?? "Error")
+                    }
+                }
+            }
+        } else {
+            _ = genresId.map { genreId in
+                tvGenres.map { tvGenre in
+                    if genreId == tvGenre.id {
+                        returnArray.append(tvGenre.name ?? "Error")
+                    }
+                }
+            }
+        }
+        return returnArray
+    }
+
     private func makeDimView() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
@@ -90,6 +175,28 @@ final class HomeTableViewController: UITableViewController {
     private func createObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(itemTapped(_:)), name: Notification.Name.itemTappedNotiName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(seeAllTapped(_:)), name: Notification.Name.seeAllTappedNotiName, object: nil)
+    }
+
+    private func setContentForCell(cell: HomeTableViewCell, array: [ListedItem]) {
+        let posterPathList = getPosterPathFromArray(array: array)
+        let idList = getIdFromArray(array: array)
+        cell.configDataHomeCollectionViewCell(idListTemp: idList, posterListTemp: posterPathList)
+    }
+
+    private func getIdFromArray(array: [ListedItem]) -> [Int] {
+        var idList = [Int]()
+        _ = array.map({ element in
+            idList.append(element.id)
+        })
+        return idList
+    }
+
+    private func getPosterPathFromArray(array: [ListedItem]) -> [String] {
+        var posterPathList = [String]()
+        for element in array {
+            posterPathList.append(element.posterPath ?? "No value")
+        }
+        return posterPathList
     }
 
     @objc private func itemTapped(_ notification: Notification) {
@@ -170,12 +277,23 @@ final class HomeTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.identifier, for: indexPath) as? HomeTableViewCell else {
             return UITableViewCell()
         }
+        let sections: Sections = Sections(rawValue: indexPath.section) ?? .trending
+        switch sections {
+        case .myList:
+            setContentForCell(cell: cell, array: myList)
+        case .trending:
+            setContentForCell(cell: cell, array: trendingList)
+        case .popularMovie:
+            setContentForCell(cell: cell, array: popularMovieList)
+        case .popularTvShow:
+            setContentForCell(cell: cell, array: popularTvshowList)
+        }
 
         return cell
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 145
+        return 150
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -187,7 +305,7 @@ final class HomeTableViewController: UITableViewController {
             return UIView()
         }
 
-        headerView.sectionTitle.text = sectionTitles[section]
+        headerView.sectionTitle?.text = sectionTitles[section]
 
         return headerView
     }

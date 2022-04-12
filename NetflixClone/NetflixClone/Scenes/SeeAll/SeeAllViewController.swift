@@ -5,7 +5,7 @@ final class SeeAllViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView?
     private var searchTitle: String = ""
 
-    //TODO Update later
+    // TODO Update later
     override func viewDidLoad() {
         super.viewDidLoad()
         viewTitle?.text = "Trending"
@@ -35,7 +35,7 @@ extension SeeAllViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         1
     }
-    //TODO Update later
+    // TODO Update later
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 20
     }
