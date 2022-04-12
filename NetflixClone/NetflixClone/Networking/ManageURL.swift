@@ -7,12 +7,20 @@ private extension URL {
         }
         return URL(fileURLWithPath: "")
     }
+
+    static func makeForImageEndPoints(endpoint: String) -> URL {
+        if let url = URL(string: "\(Constants.baseImageURL)/\(endpoint)") {
+            return url
+        }
+        return URL(fileURLWithPath: "")
+    }
 }
 
 enum EndPoint {
     case list(listType: ListType, mediaType: MediaType)
     case detail(mediaType: MediaType, id: Int)
     case genre(mediaType: MediaType)
+    case image(url: String)
 }
 
 extension EndPoint {
@@ -29,6 +37,8 @@ extension EndPoint {
             return .makeForEndPoints(endpoint: "\(mediaType.rawValue)/\(id)")
         case .genre(mediaType: let mediaType):
             return .makeForEndPoints(endpoint: "genre/\(mediaType.rawValue)/list")
+        case .image(url: let url):
+            return .makeForImageEndPoints(endpoint: "\(url)")
         }
     }
 }

@@ -3,6 +3,7 @@ import UIKit
 final class CategoryViewController: UIViewController {
     @IBOutlet private weak var closeButton: UIButton?
     @IBOutlet private weak var tableView: UITableView?
+    
     private let backgroundColor = UIColor.black.withAlphaComponent(0.0)
     private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
 

@@ -10,3 +10,10 @@ enum ListType: String {
     case trending
     case popular
 }
+
+enum Sections: Int {
+    case myList = 0
+    case trending = 1
+    case popularMovie = 2
+    case popularTvShow = 3
+}
