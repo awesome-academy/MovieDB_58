@@ -1,6 +1,8 @@
 import UIKit
 
 final class HomeTableViewCell: UITableViewCell, ReuseableView {
+    private var itemId: Int = 1
+    private var isMovie = false
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -46,4 +48,9 @@ extension HomeTableViewCell: UICollectionViewDataSource {
 }
 
 extension HomeTableViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let notiName = Notification.Name(rawValue: "com.Turacle.itemTapped")
+        let userInfo = ["userInfo": ["id": itemId, "isMovie": isMovie]]
+        NotificationCenter.default.post(name: notiName, object: nil, userInfo: userInfo)
+    }
 }
