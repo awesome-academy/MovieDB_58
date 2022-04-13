@@ -33,16 +33,16 @@ final class CategoryViewController: UIViewController {
         DispatchQueue.global(qos: .utility).async { [weak self] in
             let apiRepo = APIRepository()
             guard let self = self else { return }
-            let thisVC = self
             let group = DispatchGroup()
 
             group.enter()
-            apiRepo.getGenreCategory(mediaType: .tvShow, viewController: thisVC) {(genresArray: Genres) in
+            apiRepo.getGenreCategory(mediaType: .tvShow, viewController: self) { (genresArray: Genres) in
                 self.tvGenres.append(contentsOf: genresArray.genres)
                 group.leave()
             }
+            
             group.enter()
-            apiRepo.getGenreCategory(mediaType: .movie, viewController: thisVC) {(genresArray: Genres) in
+            apiRepo.getGenreCategory(mediaType: .movie, viewController: self) { (genresArray: Genres) in
                 self.movieGenres.append(contentsOf: genresArray.genres)
                 group.leave()
             }
@@ -55,13 +55,16 @@ final class CategoryViewController: UIViewController {
     }
 
     private func setContentForCell(cell: UITableViewCell, indexPath: IndexPath) {
-        if indexPath.section == 0 {
+        guard let categorySection: CategorySection = CategorySection(rawValue: indexPath.section) else {
+            return
+        }
+
+        switch categorySection {
+        case .all:
             cell.textLabel?.text = "All genres"
-        }
-        if indexPath.section == 1 {
+        case .movie:
             cell.textLabel?.text = movieGenres[indexPath.row].name
-        }
-        if indexPath.section == 2 {
+        case .tvShow:
             cell.textLabel?.text = tvGenres[indexPath.row].name
         }
     }
@@ -73,15 +76,18 @@ final class CategoryViewController: UIViewController {
 
 extension CategoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+        guard let categorySection: CategorySection = CategorySection(rawValue: section) else {
+            return 0
+        }
+
+        switch categorySection {
+        case .all:
             return 1
-        }
-
-        if section == 1 {
+        case .movie:
             return movieGenres.count
+        case .tvShow:
+            return tvGenres.count
         }
-
-        return tvGenres.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,14 +107,18 @@ extension CategoryViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 1 {
-            return "Movie Genres"
+        guard let categorySection: CategorySection = CategorySection(rawValue: section) else {
+            return ""
         }
 
-        if section == 2 {
+        switch categorySection {
+        case .all:
+            return ""
+        case .movie:
+            return "Movie Genres"
+        case .tvShow:
             return "TV Show Genres"
         }
-        return ""
     }
 
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {

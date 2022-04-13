@@ -17,3 +17,9 @@ enum Sections: Int {
     case popularMovie = 2
     case popularTvShow = 3
 }
+
+enum CategorySection: Int {
+    case all = 0
+    case movie = 1
+    case tvShow = 2
+}
