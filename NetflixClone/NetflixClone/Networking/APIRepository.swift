@@ -4,6 +4,7 @@ import UIKit
 protocol APIRepositoryType {
 
     func getList(listType: ListType, mediaType: MediaType, viewController: UITableViewController, completion: @escaping (ListedItems) -> Void)
+    func getDiscoverList(mediaType: MediaType, genreId: Int, viewController: UITableViewController, completion: @escaping (ListedItems) -> Void)
     func getMovieDetail(id: Int, viewController: UITableViewController, completion: @escaping (MovieDetail) -> Void)
     func getTvDetail(id: Int, viewController: UITableViewController, completion: @escaping (TvDetail) -> Void)
     func getGenre(mediaType: MediaType, viewController: UITableViewController, completion: @escaping (Genres) -> Void)
@@ -20,7 +21,19 @@ class APIRepository: APIRepositoryType {
             case .success(let success):
                 completion(success)
             case .failure(let error):
-                print(error)
+                self?.popupError(error: error, viewController: viewController)
+            }
+        }
+    }
+
+    func getDiscoverList(mediaType: MediaType, genreId: Int, viewController: UITableViewController, completion: @escaping (ListedItems) -> Void) {
+        let endPoint = EndPoint.discoverList(mediaType: mediaType, genreId: genreId)
+
+        APICaller.shared.getJSON(endPoint: endPoint) { [weak self] (result: Result<ListedItems, Error>) in
+            switch result {
+            case .success(let success):
+                completion(success)
+            case .failure(let error):
                 self?.popupError(error: error, viewController: viewController)
             }
         }
@@ -34,7 +47,6 @@ class APIRepository: APIRepositoryType {
             case .success(let success):
                 completion(success)
             case .failure(let error):
-                print(error)
                 self?.popupError(error: error, viewController: viewController)
             }
         }
@@ -48,7 +60,6 @@ class APIRepository: APIRepositoryType {
             case .success(let success):
                 completion(success)
             case .failure(let error):
-                print(error)
                 self?.popupError(error: error, viewController: viewController)
             }
         }
@@ -62,7 +73,6 @@ class APIRepository: APIRepositoryType {
             case .success(let success):
                 completion(success)
             case .failure(let error):
-                print(error)
                 self?.popupError(error: error, viewController: viewController)
             }
         }
@@ -76,7 +86,6 @@ class APIRepository: APIRepositoryType {
             case .success(let success):
                 completion(success)
             case .failure(let error):
-                print(error)
                 self?.popupErrorCategory(error: error, viewController: viewController)
             }
         }

@@ -13,7 +13,7 @@
         <!--Category View Controller-->
         <scene sceneID="haP-xB-YQn">
             <objects>
-                <viewController id="Uhx-3M-7oe" customClass="CategoryViewController" customModule="NetflixClone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategoryScreen" id="Uhx-3M-7oe" customClass="CategoryViewController" customModule="NetflixClone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xN5-iG-ENh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -86,11 +86,11 @@
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeHolder" translatesAutoresizingMaskIntoConstraints="NO" id="Xrr-ZN-eV3">
                                     <rect key="frame" x="0.0" y="-88" width="414" height="544"/>
                                 </imageView>
-                                <stackView opaque="NO" contentMode="center" distribution="fillEqually" alignment="center" spacing="-50" translatesAutoresizingMaskIntoConstraints="NO" id="xEC-4K-Xfj">
-                                    <rect key="frame" x="0.0" y="18" width="414" height="31"/>
+                                <stackView opaque="NO" contentMode="center" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="xEC-4K-Xfj">
+                                    <rect key="frame" x="0.0" y="18" width="414" height="34.5"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vX0-kj-xhy">
-                                            <rect key="frame" x="0.0" y="0.0" width="171.5" height="31"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vX0-kj-xhy">
+                                            <rect key="frame" x="0.0" y="0.0" width="131.5" height="34.5"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" title="TV Shows">
                                                 <fontDescription key="titleFontDescription" style="UICTFontTextStyleBody"/>
@@ -100,8 +100,8 @@
                                                 <action selector="tvShowButtonTapped:" destination="44k-I4-y9S" eventType="touchUpInside" id="CI5-mT-QHm"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Wd-5B-s5h">
-                                            <rect key="frame" x="121.5" y="0.0" width="171" height="31"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Wd-5B-s5h">
+                                            <rect key="frame" x="131.5" y="0.0" width="104" height="34.5"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" title="Movies">
                                                 <fontDescription key="titleFontDescription" style="UICTFontTextStyleBody"/>
@@ -111,18 +111,18 @@
                                                 <action selector="movieButtonTapped:" destination="44k-I4-y9S" eventType="touchUpInside" id="104-Zk-oBn"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPX-KG-IQv">
-                                            <rect key="frame" x="242.5" y="0.0" width="171.5" height="31"/>
+                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPX-KG-IQv">
+                                            <rect key="frame" x="235.5" y="0.0" width="178.5" height="34.5"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                             <state key="normal" title="Categories ▼">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <buttonConfiguration key="configuration" style="plain" image="Polygon 1" imagePlacement="trailing" title="Categories">
-                                                <fontDescription key="titleFontDescription" style="UICTFontTextStyleBody"/>
+                                                <fontDescription key="titleFontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                                 <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </buttonConfiguration>
                                             <connections>
-                                                <segue destination="Uhx-3M-7oe" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Yah-gN-Um4"/>
+                                                <action selector="categoriesButtonTapped:" destination="44k-I4-y9S" eventType="touchUpInside" id="eU7-Oc-Si0"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -288,18 +288,90 @@
         <scene sceneID="veu-UC-SnT">
             <objects>
                 <tableViewController storyboardIdentifier="SearchTableViewController" id="AzP-uL-ozO" customClass="SearchTableViewController" customModule="NetflixClone" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="ear-xD-um3">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="ear-xD-um3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="gAh-fn-n4f">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="13" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5xc-sK-OXO">
+                                    <rect key="frame" x="10" y="0.0" width="393.5" height="44"/>
+                                    <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LT9-aA-OCj">
+                                    <rect key="frame" x="166" y="16.5" width="11.5" height="10.5"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="11.69" id="9hh-9N-0Dd"/>
+                                        <constraint firstAttribute="width" constant="11.69" id="oH8-GS-6gs"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="5xc-sK-OXO" secondAttribute="bottom" id="NpH-7n-ixr"/>
+                                <constraint firstItem="LT9-aA-OCj" firstAttribute="centerX" secondItem="5xc-sK-OXO" secondAttribute="centerX" constant="-35" id="W1k-EK-h8X"/>
+                                <constraint firstItem="5xc-sK-OXO" firstAttribute="top" secondItem="gAh-fn-n4f" secondAttribute="top" id="YOa-O0-9WP"/>
+                                <constraint firstItem="5xc-sK-OXO" firstAttribute="leading" secondItem="gAh-fn-n4f" secondAttribute="leading" constant="10" id="Ygw-61-7KF"/>
+                                <constraint firstItem="LT9-aA-OCj" firstAttribute="centerY" secondItem="5xc-sK-OXO" secondAttribute="centerY" id="aIq-UU-gBa"/>
+                                <constraint firstItem="5xc-sK-OXO" firstAttribute="width" secondItem="gAh-fn-n4f" secondAttribute="width" multiplier="0.95" id="mfW-wX-1LK"/>
+                            </constraints>
+                        </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="j2X-eI-xNQ">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="j2X-eI-xNQ" customClass="SearchTableViewCell" customModule="NetflixClone" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="93.5" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j2X-eI-xNQ" id="Qfh-YV-Z6o">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeHolder" translatesAutoresizingMaskIntoConstraints="NO" id="1qs-qJ-6mI">
+                                            <rect key="frame" x="15" y="0.0" width="143" height="77"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="143" id="0ZM-y7-Jnh"/>
+                                                <constraint firstAttribute="height" constant="77" id="kN0-b8-3ul"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQs-yp-89N">
+                                            <rect key="frame" x="178" y="11.5" width="134" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="134" id="smu-Uv-czW"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vf7-tt-2SG">
+                                            <rect key="frame" x="327" y="12" width="47" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="rrx-70-HQ4"/>
+                                            </constraints>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="play.circle" catalog="system" title="">
+                                                <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </buttonConfiguration>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="CQs-yp-89N" firstAttribute="leading" secondItem="1qs-qJ-6mI" secondAttribute="trailing" constant="20" id="XZQ-WO-NZu"/>
+                                        <constraint firstItem="1qs-qJ-6mI" firstAttribute="top" secondItem="Qfh-YV-Z6o" secondAttribute="top" id="ZWB-2S-4fD"/>
+                                        <constraint firstItem="Vf7-tt-2SG" firstAttribute="centerY" secondItem="Qfh-YV-Z6o" secondAttribute="centerY" id="dVm-BL-UCw"/>
+                                        <constraint firstItem="CQs-yp-89N" firstAttribute="centerY" secondItem="Qfh-YV-Z6o" secondAttribute="centerY" id="dmF-eV-n4H"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Vf7-tt-2SG" secondAttribute="trailing" constant="20" id="g6M-XJ-BtK"/>
+                                        <constraint firstItem="Vf7-tt-2SG" firstAttribute="leading" secondItem="CQs-yp-89N" secondAttribute="trailing" constant="15" id="qCc-t5-Yjd"/>
+                                        <constraint firstItem="1qs-qJ-6mI" firstAttribute="leading" secondItem="Qfh-YV-Z6o" secondAttribute="leading" constant="15" id="x5C-1V-4et"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cellImage" destination="1qs-qJ-6mI" id="f4k-zE-aWf"/>
+                                    <outlet property="cellLabel" destination="CQs-yp-89N" id="ndX-yC-nhr"/>
+                                    <outlet property="cellPlayButton" destination="Vf7-tt-2SG" id="QB1-HG-4am"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -307,6 +379,10 @@
                             <outlet property="delegate" destination="AzP-uL-ozO" id="z9p-co-GBe"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="searchTextField" destination="5xc-sK-OXO" id="GHU-5d-ydV"/>
+                        <outlet property="searchTextFieldImage" destination="LT9-aA-OCj" id="uT9-nA-2vb"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xkv-Hj-Ocb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -498,8 +574,10 @@
         <image name="Polygon 1" width="13" height="6"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="info.circle" catalog="system" width="128" height="121"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
         <image name="placeHolder" width="1200" height="800"/>
+        <image name="play.circle" catalog="system" width="128" height="121"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

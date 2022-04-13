@@ -1,5 +1,10 @@
 import UIKit
 
+protocol CategorySelectionDelegate {
+    func allCategoryTapped()
+    func mediaTypeCategoryTapped(mediaType: MediaType, genreId: Int, genreName: String)
+}
+
 final class CategoryViewController: UIViewController {
     @IBOutlet private weak var closeButton: UIButton?
     @IBOutlet private weak var tableView: UITableView?
@@ -7,6 +12,7 @@ final class CategoryViewController: UIViewController {
     private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     private var movieGenres = [Genre]()
     private var tvGenres = [Genre]()
+    var categorySelectionDelegate: CategorySelectionDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,6 +106,23 @@ extension CategoryViewController: UITableViewDataSource {
 extension CategoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        guard let categorySection: CategorySection = CategorySection(rawValue: indexPath.section) else {
+            return
+        }
+
+        switch categorySection {
+        case .all:
+            categorySelectionDelegate?.allCategoryTapped()
+        case .movie:
+            let genreId = movieGenres[indexPath.row].id
+            let genreName = movieGenres[indexPath.row].name ?? "No name"
+            categorySelectionDelegate?.mediaTypeCategoryTapped(mediaType: .movie, genreId: genreId, genreName: genreName)
+        case .tvShow:
+            let genreId = tvGenres[indexPath.row].id
+            let genreName = tvGenres[indexPath.row].name ?? "No name"
+            categorySelectionDelegate?.mediaTypeCategoryTapped(mediaType: .tvShow, genreId: genreId, genreName: genreName)
+        }
+        dismiss(animated: true)
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

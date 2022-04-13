@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="101" height="145"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="xFD-HO-rJ3" customClass="ImageLoader" customModule="NetflixClone" customModuleProvider="target">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeHolder" translatesAutoresizingMaskIntoConstraints="NO" id="xFD-HO-rJ3" customClass="ImageLoader" customModule="NetflixClone" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="101" height="145"/>
                     </imageView>
                 </subviews>
@@ -36,6 +36,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Image" width="1026" height="1152"/>
+        <image name="placeHolder" width="1200" height="800"/>
     </resources>
 </document>
