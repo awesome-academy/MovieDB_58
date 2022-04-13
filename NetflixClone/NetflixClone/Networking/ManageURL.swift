@@ -14,10 +14,18 @@ private extension URL {
         }
         return URL(fileURLWithPath: "")
     }
+
+    static func makeForDiscoverEndPoints(endpoint: String) -> URL {
+        if let url = URL(string: "\(Constants.baseDiscoverURL)/\(endpoint)") {
+            return url
+        }
+        return URL(fileURLWithPath: "")
+    }
 }
 
 enum EndPoint {
     case list(listType: ListType, mediaType: MediaType)
+    case discoverList(mediaType: MediaType, genreId: Int)
     case detail(mediaType: MediaType, id: Int)
     case genre(mediaType: MediaType)
     case image(url: String)
@@ -33,6 +41,8 @@ extension EndPoint {
             case .popular:
                 return .makeForEndPoints(endpoint: "\(mediaType.rawValue)/popular")
             }
+        case .discoverList(mediaType: let mediaType, genreId: let genreId):
+            return .makeForDiscoverEndPoints(endpoint: "\(mediaType.rawValue)?api_key=\(Constants.apiKey)&with_genres=\(genreId)")
         case .detail(mediaType: let mediaType, id: let id):
             return .makeForEndPoints(endpoint: "\(mediaType.rawValue)/\(id)")
         case .genre(mediaType: let mediaType):
