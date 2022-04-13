@@ -7,6 +7,7 @@ protocol APIRepositoryType {
     func getMovieDetail(id: Int, viewController: UITableViewController, completion: @escaping (MovieDetail) -> Void)
     func getTvDetail(id: Int, viewController: UITableViewController, completion: @escaping (TvDetail) -> Void)
     func getGenre(mediaType: MediaType, viewController: UITableViewController, completion: @escaping (Genres) -> Void)
+    func getGenreCategory(mediaType: MediaType, viewController: UIViewController, completion: @escaping (Genres) -> Void)
     func getImage(url: String, completion: @escaping (Result<Data, Error>) -> Void)
 }
 
@@ -15,13 +16,12 @@ class APIRepository: APIRepositoryType {
         let endPoint = EndPoint.list(listType: listType, mediaType: mediaType)
 
         APICaller.shared.getJSON(endPoint: endPoint) { [weak self] (result: Result<ListedItems, Error>) in
-            guard let self = self else { return }
             switch result {
             case .success(let success):
                 completion(success)
             case .failure(let error):
                 print(error)
-                self.popupError(error: error, viewController: viewController)
+                self?.popupError(error: error, viewController: viewController)
             }
         }
     }
@@ -30,13 +30,12 @@ class APIRepository: APIRepositoryType {
         let endPoint = EndPoint.detail(mediaType: MediaType.movie, id: id)
 
         APICaller.shared.getJSON(endPoint: endPoint) { [weak self] (result: Result<MovieDetail, Error>) in
-            guard let self = self else { return }
             switch result {
             case .success(let success):
                 completion(success)
             case .failure(let error):
                 print(error)
-                self.popupError(error: error, viewController: viewController)
+                self?.popupError(error: error, viewController: viewController)
             }
         }
     }
@@ -45,13 +44,12 @@ class APIRepository: APIRepositoryType {
         let endPoint = EndPoint.detail(mediaType: MediaType.movie, id: id)
 
         APICaller.shared.getJSON(endPoint: endPoint) { [weak self] (result: Result<TvDetail, Error>) in
-            guard let self = self else { return }
             switch result {
             case .success(let success):
                 completion(success)
             case .failure(let error):
                 print(error)
-                self.popupError(error: error, viewController: viewController)
+                self?.popupError(error: error, viewController: viewController)
             }
         }
     }
@@ -60,13 +58,26 @@ class APIRepository: APIRepositoryType {
         let endPoint = EndPoint.genre(mediaType: mediaType)
 
         APICaller.shared.getJSON(endPoint: endPoint) { [weak self] (result: Result<Genres, Error>) in
-            guard let self = self else { return }
             switch result {
             case .success(let success):
                 completion(success)
             case .failure(let error):
                 print(error)
-                self.popupError(error: error, viewController: viewController)
+                self?.popupError(error: error, viewController: viewController)
+            }
+        }
+    }
+
+    func getGenreCategory(mediaType: MediaType, viewController: UIViewController, completion: @escaping (Genres) -> Void) {
+        let endPoint = EndPoint.genre(mediaType: mediaType)
+
+        APICaller.shared.getJSON(endPoint: endPoint) { [weak self] (result: Result<Genres, Error>) in
+            switch result {
+            case .success(let success):
+                completion(success)
+            case .failure(let error):
+                print(error)
+                self?.popupErrorCategory(error: error, viewController: viewController)
             }
         }
     }
@@ -92,4 +103,11 @@ class APIRepository: APIRepositoryType {
         }
     }
 
+    func popupErrorCategory(error: Error, viewController: UIViewController) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            viewController.present(alert, animated: true)
+        }
+    }
 }

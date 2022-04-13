@@ -61,6 +61,7 @@
                             <constraint firstItem="gCM-5M-ofp" firstAttribute="top" secondItem="HGi-J2-zKs" secondAttribute="bottom" id="y4F-1e-m9p"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="QZH-aH-T2C"/>
                     <connections>
                         <outlet property="closeButton" destination="gCM-5M-ofp" id="cwA-zG-rhV"/>
                         <outlet property="tableView" destination="HGi-J2-zKs" id="3Wl-hl-PE8"/>

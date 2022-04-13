@@ -45,32 +45,35 @@ final class HomeTableViewController: UITableViewController {
     private func fetchData() {
         DispatchQueue.global(qos: .utility).async { [weak self] in
             let apiRepo = APIRepository()
-            let thisVC = self ?? UITableViewController()
             guard let self = self else { return }
             let group = DispatchGroup()
             // Start fetching
             group.enter()
-            apiRepo.getList(listType: .trending, mediaType: .all, viewController: thisVC) {(listedArray: ListedItems) in
+            apiRepo.getList(listType: .trending, mediaType: .all, viewController: self) {(listedArray: ListedItems) in
                 self.trendingList.append(contentsOf: listedArray.results)
                 group.leave()
             }
+            
             group.enter()
-            apiRepo.getList(listType: .popular, mediaType: .movie, viewController: thisVC) {(listedArray: ListedItems) in
+            apiRepo.getList(listType: .popular, mediaType: .movie, viewController: self) {(listedArray: ListedItems) in
                 self.popularMovieList.append(contentsOf: listedArray.results)
                 group.leave()
             }
+
             group.enter()
-            apiRepo.getList(listType: .popular, mediaType: .tvShow, viewController: thisVC) {(listedArray: ListedItems) in
+            apiRepo.getList(listType: .popular, mediaType: .tvShow, viewController: self) {(listedArray: ListedItems) in
                 self.popularTvshowList.append(contentsOf: listedArray.results)
                 group.leave()
             }
+
             group.enter()
-            apiRepo.getGenre(mediaType: .tvShow, viewController: thisVC) {(genresArray: Genres) in
+            apiRepo.getGenre(mediaType: .tvShow, viewController: self) {(genresArray: Genres) in
                 self.tvGenres.append(contentsOf: genresArray.genres)
                 group.leave()
             }
+
             group.enter()
-            apiRepo.getGenre(mediaType: .movie, viewController: thisVC) {(genresArray: Genres) in
+            apiRepo.getGenre(mediaType: .movie, viewController: self) {(genresArray: Genres) in
                 self.movieGenres.append(contentsOf: genresArray.genres)
                 group.leave()
             }
