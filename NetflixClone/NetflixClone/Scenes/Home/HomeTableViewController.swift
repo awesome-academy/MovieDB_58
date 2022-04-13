@@ -49,39 +49,117 @@ final class HomeTableViewController: UITableViewController {
             let group = DispatchGroup()
             // Start fetching
             group.enter()
-            apiRepo.getList(listType: .trending, mediaType: .all, viewController: self) {(listedArray: ListedItems) in
-                self.trendingList.append(contentsOf: listedArray.results)
-                group.leave()
-            }
-            
-            group.enter()
-            apiRepo.getList(listType: .popular, mediaType: .movie, viewController: self) {(listedArray: ListedItems) in
-                self.popularMovieList.append(contentsOf: listedArray.results)
-                group.leave()
-            }
+            self.fetchAllMediaTypeData()
+            group.leave()
 
             group.enter()
-            apiRepo.getList(listType: .popular, mediaType: .tvShow, viewController: self) {(listedArray: ListedItems) in
-                self.popularTvshowList.append(contentsOf: listedArray.results)
-                group.leave()
-            }
-
-            group.enter()
-            apiRepo.getGenre(mediaType: .tvShow, viewController: self) {(genresArray: Genres) in
+            apiRepo.getGenre(mediaType: .tvShow, viewController: self) { (genresArray: Genres) in
                 self.tvGenres.append(contentsOf: genresArray.genres)
                 group.leave()
             }
 
             group.enter()
-            apiRepo.getGenre(mediaType: .movie, viewController: self) {(genresArray: Genres) in
+            apiRepo.getGenre(mediaType: .movie, viewController: self) { (genresArray: Genres) in
                 self.movieGenres.append(contentsOf: genresArray.genres)
+                group.leave()
+            }
+            // Update UI
+            group.notify(queue: .main) {
+                self.tableView.reloadData()
+                print("Fetching is done!")
+            }
+        }
+    }
+
+    private func fetchAllMediaTypeData() {
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            let apiRepo = APIRepository()
+            guard let self = self else { return }
+            let group = DispatchGroup()
+            // Start fetching
+            group.enter()
+            apiRepo.getList(listType: .trending, mediaType: .all, viewController: self) { (listedArray: ListedItems) in
+                self.trendingList = [ListedItem]()
+                self.trendingList.append(contentsOf: listedArray.results)
+                group.leave()
+            }
+
+            group.enter()
+            apiRepo.getList(listType: .popular, mediaType: .movie, viewController: self) { (listedArray: ListedItems) in
+                self.popularMovieList = [ListedItem]()
+                self.popularMovieList.append(contentsOf: listedArray.results)
+                group.leave()
+            }
+
+            group.enter()
+            apiRepo.getList(listType: .popular, mediaType: .tvShow, viewController: self) { (listedArray: ListedItems) in
+                self.popularTvshowList = [ListedItem]()
+                self.popularTvshowList.append(contentsOf: listedArray.results)
                 group.leave()
             }
             // Update UI
             group.notify(queue: .main) {
                 self.configHeaderItem(apiRepo: apiRepo)
                 self.tableView.reloadData()
-                print("Fetching is done!")
+                print("Fetching all media type data is done!")
+            }
+        }
+    }
+
+    private func fetchRequiredMediaType(mediaType: MediaType) {
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            let apiRepo = APIRepository()
+            guard let self = self else { return }
+            let group = DispatchGroup()
+            // Start fetching
+            group.enter()
+            apiRepo.getList(listType: .trending, mediaType: mediaType, viewController: self) { (listedArray: ListedItems) in
+                self.trendingList = [ListedItem]()
+                self.trendingList.append(contentsOf: listedArray.results)
+                group.leave()
+            }
+            // Update UI
+            group.notify(queue: .main) {
+                self.configHeaderItem(apiRepo: apiRepo)
+                self.tableView.reloadData()
+                print("Fetching \(mediaType) media type data is done!")
+            }
+        }
+    }
+
+    private func fetchRequiredMediaTypeWithGenre(mediaType: MediaType, genreID: Int) {
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            let apiRepo = APIRepository()
+            guard let self = self else { return }
+            let group = DispatchGroup()
+            // Start fetching
+            group.enter()
+            apiRepo.getList(listType: .trending, mediaType: mediaType, viewController: self) { (listedArray: ListedItems) in
+                self.trendingList = [ListedItem]()
+                self.trendingList.append(contentsOf: listedArray.results)
+                group.leave()
+            }
+
+            group.enter()
+            apiRepo.getDiscoverList(mediaType: mediaType, genreId: genreID, viewController: self) { (listedArray: ListedItems) in
+                switch mediaType {
+                case .all:
+                    return
+                case .movie:
+                    self.popularMovieList = [ListedItem]()
+                    self.popularMovieList.append(contentsOf: listedArray.results)
+
+                case .tvShow:
+                    self.popularTvshowList = [ListedItem]()
+                    self.popularTvshowList.append(contentsOf: listedArray.results)
+                }
+                group.leave()
+            }
+            // Update UI
+            group.notify(queue: .main) {
+                self.configHeaderItem(apiRepo: apiRepo)
+                self.tableView.reloadData()
+                print("Fetching \(mediaType) with genreID: \(genreID) data is done!")
             }
         }
     }
@@ -249,6 +327,7 @@ final class HomeTableViewController: UITableViewController {
         movieEnabled = false
         tvShowButton?.titleLabel?.textColor = .white
         movieButton?.titleLabel?.textColor = .lightGray
+        fetchRequiredMediaType(mediaType: .tvShow)
 
         tableView.reloadData()
     }
@@ -258,8 +337,16 @@ final class HomeTableViewController: UITableViewController {
         tvShowEnabled = false
         movieButton?.titleLabel?.textColor = .white
         tvShowButton?.titleLabel?.textColor = .lightGray
+        fetchRequiredMediaType(mediaType: .movie)
 
         tableView.reloadData()
+    }
+    @IBAction func categoriesButtonTapped(_ sender: UIButton) {
+        guard let categoryVC = storyboard?.instantiateViewController(withIdentifier: "CategoryScreen") as? CategoryViewController else { return }
+        categoryVC.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
+        categoryVC.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        categoryVC.categorySelectionDelegate = self
+        self.present(categoryVC, animated: true)
     }
 
     @IBAction private func playButtonTapped(_ sender: UIButton) {
@@ -296,11 +383,31 @@ final class HomeTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        guard let homeSection: Sections = Sections(rawValue: indexPath.section) else { return 0 }
+        switch homeSection {
+        case .myList:
+            return 150
+        case .trending:
+            return 150
+        case .popularMovie:
+            return movieEnabled ? 150 : 0
+        case .popularTvShow:
+            return tvShowEnabled ? 150 : 0
+        }
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 45
+        guard let homeSection: Sections = Sections(rawValue: section) else { return 0 }
+        switch homeSection {
+        case .myList:
+            return 45
+        case .trending:
+            return 45
+        case .popularMovie:
+            return movieEnabled ? 45 : 0
+        case .popularTvShow:
+            return tvShowEnabled ? 45 : 0
+        }
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -311,5 +418,49 @@ final class HomeTableViewController: UITableViewController {
         headerView.sectionTitle?.text = sectionTitles[section]
 
         return headerView
+    }
+}
+
+extension HomeTableViewController: CategorySelectionDelegate {
+    func allCategoryTapped() {
+        categoriesButton?.titleLabel?.text = nil
+        tvShowButton?.isHidden = false
+        movieButton?.isHidden = false
+        movieEnabled = true
+        tvShowEnabled = true
+        tvShowButton?.titleLabel?.textColor = .white
+        movieButton?.titleLabel?.textColor = .white
+        categoriesButton?.titleLabel?.text = "Categories"
+        fetchAllMediaTypeData()
+        tableView.reloadData()
+    }
+
+    func mediaTypeCategoryTapped(mediaType: MediaType, genreId: Int, genreName: String) {
+        categoriesButton?.titleLabel?.text = nil
+        switch mediaType {
+        case .all:
+            return
+        case .movie:
+            movieButton?.isHidden = false
+            tvShowButton?.isHidden = true
+            categoriesButton?.titleLabel?.text = genreName
+            categoriesButton?.titleLabel?.textAlignment = .center
+            fetchRequiredMediaTypeWithGenre(mediaType: .movie, genreID: genreId)
+            movieEnabled = true
+            tvShowEnabled = false
+            tvShowButton?.titleLabel?.textColor = .lightGray
+            movieButton?.titleLabel?.textColor = .white
+        case .tvShow:
+            movieButton?.isHidden = true
+            tvShowButton?.isHidden = false
+            categoriesButton?.titleLabel?.text = genreName
+            categoriesButton?.titleLabel?.textAlignment = .center
+            fetchRequiredMediaTypeWithGenre(mediaType: .tvShow, genreID: genreId)
+            movieEnabled = false
+            tvShowEnabled = true
+            tvShowButton?.titleLabel?.textColor = .white
+            movieButton?.titleLabel?.textColor = .lightGray
+        }
+        tableView.reloadData()
     }
 }
