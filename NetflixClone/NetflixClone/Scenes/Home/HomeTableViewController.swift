@@ -8,7 +8,7 @@ final class HomeTableViewController: UITableViewController {
     @IBOutlet private weak var categoriesButton: UIButton?
     @IBOutlet weak var headerTitle: UILabel?
     @IBOutlet weak var headerGenres: UILabel?
-    
+
     private let sectionTitles = ["My List", "Trending", "Popular Movie", "Popular TV Show"]
     private var movieEnabled = true
     private var tvShowEnabled = true
@@ -174,9 +174,11 @@ final class HomeTableViewController: UITableViewController {
         let searchImage = UIImage(systemName: "magnifyingglass")
         let searchButton = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(searchButtonTapped))
         searchButton.tintColor = .white
-        self.navigationItem.rightBarButtonItem = searchButton
-        self.navigationController?.hidesBarsOnSwipe = true
-        self.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationBar.tintColor = .white
+        navigationItem.rightBarButtonItem = searchButton
+        navigationController?.hidesBarsOnSwipe = true
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.backButtonTitle = ""
     }
 
     private func enableNavBarOnPushedView() {
@@ -354,7 +356,6 @@ final class HomeTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitles.count
     }

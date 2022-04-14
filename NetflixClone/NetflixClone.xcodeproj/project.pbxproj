@@ -45,6 +45,9 @@
 		DFE6E1D32805218F0025D737 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6E1D12805218F0025D737 /* ListCollectionViewCell.swift */; };
 		DFE6E1D42805218F0025D737 /* ListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFE6E1D22805218F0025D737 /* ListCollectionViewCell.xib */; };
 		DFE6E1D628056D3A0025D737 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6E1D528056D3A0025D737 /* ImageCache.swift */; };
+		DFE6E1DA2806D3850025D737 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6E1D92806D3850025D737 /* SearchTableViewCell.swift */; };
+		DFE6E1DE2806FA8C0025D737 /* SearchSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6E1DD2806FA8C0025D737 /* SearchSectionHeaderView.swift */; };
+		DFE6E1E02806FAA50025D737 /* SearchSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFE6E1DF2806FAA50025D737 /* SearchSectionHeaderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +91,9 @@
 		DFE6E1D12805218F0025D737 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		DFE6E1D22805218F0025D737 /* ListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCollectionViewCell.xib; sourceTree = "<group>"; };
 		DFE6E1D528056D3A0025D737 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		DFE6E1D92806D3850025D737 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		DFE6E1DD2806FA8C0025D737 /* SearchSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSectionHeaderView.swift; sourceTree = "<group>"; };
+		DFE6E1DF2806FAA50025D737 /* SearchSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchSectionHeaderView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +238,7 @@
 		DFE6E1C728044C4C0025D737 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				DFE6E1D82806D3640025D737 /* Cell */,
 				DF5A843C27FFEF6F00FFA85F /* SearchTableViewController.swift */,
 			);
 			path = Search;
@@ -299,6 +306,16 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		DFE6E1D82806D3640025D737 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DFE6E1D92806D3850025D737 /* SearchTableViewCell.swift */,
+				DFE6E1DD2806FA8C0025D737 /* SearchSectionHeaderView.swift */,
+				DFE6E1DF2806FAA50025D737 /* SearchSectionHeaderView.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -364,6 +381,7 @@
 				DF464BC627FAD7A5004310C8 /* LaunchScreen.storyboard in Resources */,
 				DF464BC327FAD7A5004310C8 /* Assets.xcassets in Resources */,
 				DF464BC127FAD7A0004310C8 /* Main.storyboard in Resources */,
+				DFE6E1E02806FAA50025D737 /* SearchSectionHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +428,7 @@
 				DFBF496927FC231200140F00 /* ListedItem.swift in Sources */,
 				DF49F14427FE90FA00628E79 /* APIRepository.swift in Sources */,
 				DF49F14627FEDE3300628E79 /* HomeTableViewCell.swift in Sources */,
+				DFE6E1DA2806D3850025D737 /* SearchTableViewCell.swift in Sources */,
 				DF5A843D27FFEF6F00FFA85F /* SearchTableViewController.swift in Sources */,
 				DF5A843B27FFE19700FFA85F /* DetailTableViewController.swift in Sources */,
 				DF6E512327FBEE6E001FF8D8 /* ComingSoonTableViewController.swift in Sources */,
@@ -421,6 +440,7 @@
 				DF49F12C27FD1E1900628E79 /* Cast.swift in Sources */,
 				DF49F12A27FD1C6600628E79 /* TvDetail.swift in Sources */,
 				DF49F13627FD4C8400628E79 /* CreatedBy.swift in Sources */,
+				DFE6E1DE2806FA8C0025D737 /* SearchSectionHeaderView.swift in Sources */,
 				DF49F13227FD457100628E79 /* Season.swift in Sources */,
 				DF49F12627FC3A6E00628E79 /* MovieDetail.swift in Sources */,
 				DF49F13C27FE6CD100628E79 /* Constants.swift in Sources */,
