@@ -3,13 +3,16 @@ import UIKit
 final class SearchTableViewController: UITableViewController {
     @IBOutlet weak var searchTextField: UITextField?
     @IBOutlet weak var searchTextFieldImage: UIImageView?
+    
+    private var searchResults = [ListedItem]()
+    private var pageCount = 1
+    private var searchText = ""
+    private var keepFetching = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
         configSearchTextField()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
     }
 
     private func configView() {
@@ -20,6 +23,7 @@ final class SearchTableViewController: UITableViewController {
         guard let searchTextField = searchTextField else {
             return
         }
+        searchTextField.delegate = self
         searchTextField.borderStyle = .none
         searchTextField.layer.cornerRadius = 5
         searchTextField.placeholder = "Search"
@@ -31,8 +35,53 @@ final class SearchTableViewController: UITableViewController {
         searchTextField.addTarget(self, action: #selector(textFieldEndEditing), for: .editingDidEnd)
     }
 
-    @objc private func dismissKeyboard() {
-        view.endEditing(true)
+    private func fetchData(query: String, page: Int) {
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            let apiRepo = APIRepository()
+            guard let self = self else { return }
+            let group = DispatchGroup()
+            // Start fetching
+            group.enter()
+            apiRepo.getSearchList(query: query, page: page, viewController: self) { (result: Result<ListedItems, Error>) in
+                switch result {
+                case .success(let listedArray):
+                    if listedArray.results.isEmpty {
+                        DispatchQueue.main.async {
+                            self.createAlert()
+                        }
+                    } else {
+                        self.searchResults.append(contentsOf: listedArray.results)
+                    }
+                case .failure(let error):
+                    self.popupError(error: error, viewController: self)
+                }
+                group.leave()
+            }
+            // Update UI
+            group.notify(queue: .main) {
+                self.tableView.reloadData()
+                print("Fetching search with query: \(query) data is done!")
+            }
+        }
+    }
+
+    private func createAlert() {
+        let alert = UIAlertController(title: "Error", message: "End of List!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+
+    func popupError(error: Error, viewController: UITableViewController) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            viewController.present(alert, animated: true)
+        }
+    }
+
+    private func itemTapped(id: Int, isMovie: Bool) {
+        let detailVC = DetailTableViewController(id: id, isMovie: isMovie)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 
     @objc private func textFieldTapped() {
@@ -48,11 +97,24 @@ final class SearchTableViewController: UITableViewController {
         guard let searchTextField = searchTextField else {
             return
         }
+        guard var text = searchTextField.text else {
+            return
+        }
         if searchTextField.text?.isEmpty == true {
+            searchResults = [ListedItem]()
+            pageCount = 1
             searchTextFieldImage?.isHidden = false
             searchTextField.placeholder = "Search"
             searchTextField.textAlignment = .center
+            searchText = ""
+            return
         }
+        searchResults = [ListedItem]()
+        pageCount = 1
+        text = text.replacingOccurrences(of: " ", with: "%20")
+        fetchData(query: text, page: pageCount)
+        searchText = text
+        tableView.reloadData()
     }
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -62,13 +124,18 @@ final class SearchTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return searchResults.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath)
 
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        itemTapped(id: searchResults[indexPath.row].id, isMovie: searchResults[indexPath.row].name != nil)
     }
 
     // MARK: - Table view delegate
@@ -86,5 +153,29 @@ final class SearchTableViewController: UITableViewController {
         }
 
         return headerView
+    }
+
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offSetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+
+        if contentHeight >= scrollView.frame.height {
+            if offSetY > contentHeight - scrollView.frame.height + 150 {
+                pageCount += 1
+                fetchData(query: searchText, page: pageCount)
+                tableView.reloadData()
+            }
+        }
+
+        if offSetY < -200 {
+            tableView.reloadData()
+        }
+    }
+}
+
+extension SearchTableViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchTextField?.resignFirstResponder()
+        return true
     }
 }
