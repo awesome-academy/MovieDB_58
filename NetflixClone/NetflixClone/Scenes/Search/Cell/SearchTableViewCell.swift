@@ -1,7 +1,7 @@
 import UIKit
 
 final class SearchTableViewCell: UITableViewCell {
-    @IBOutlet weak var cellImage: UIImageView?
+    @IBOutlet weak var cellImage: ImageLoader?
     @IBOutlet weak var cellLabel: UILabel?
     @IBOutlet weak var cellPlayButton: UIButton?
 

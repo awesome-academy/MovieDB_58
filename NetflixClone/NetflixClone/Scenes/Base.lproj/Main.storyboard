@@ -329,7 +329,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="121"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeHolder" translatesAutoresizingMaskIntoConstraints="NO" id="1qs-qJ-6mI">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeHolder" translatesAutoresizingMaskIntoConstraints="NO" id="1qs-qJ-6mI" customClass="ImageLoader" customModule="NetflixClone" customModuleProvider="target">
                                             <rect key="frame" x="15" y="0.0" width="143" height="77"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="143" id="0ZM-y7-Jnh"/>
@@ -339,7 +339,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQs-yp-89N">
                                             <rect key="frame" x="178" y="28" width="134" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="134" id="smu-Uv-czW"/>
+                                                <constraint firstAttribute="width" constant="134" id="smu-Uv-czW"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>

@@ -36,7 +36,7 @@ final class SearchTableViewController: UITableViewController {
     }
 
     private func fetchData(query: String, page: Int) {
-        DispatchQueue.global(qos: .utility).async { [weak self] in
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             let apiRepo = APIRepository()
             guard let self = self else { return }
             let group = DispatchGroup()
@@ -71,7 +71,7 @@ final class SearchTableViewController: UITableViewController {
         present(alert, animated: true)
     }
 
-    func popupError(error: Error, viewController: UITableViewController) {
+    private func popupError(error: Error, viewController: UITableViewController) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -79,9 +79,29 @@ final class SearchTableViewController: UITableViewController {
         }
     }
 
+    private func setContentForCell(cell: SearchTableViewCell, indexPath: IndexPath) {
+        guard let posterPath = searchResults[indexPath.row].posterPath else { return }
+        guard let name = searchResults[indexPath.row].name ?? searchResults[indexPath.row].title else { return }
+        cell.cellImage?.setImageByUrl(url: posterPath)
+        cell.cellLabel?.text = name
+    }
+
     private func itemTapped(id: Int, isMovie: Bool) {
         let detailVC = DetailTableViewController(id: id, isMovie: isMovie)
         navigationController?.pushViewController(detailVC, animated: true)
+    }
+
+    private func loadMoreData() {
+        if !keepFetching {
+            keepFetching.toggle()
+            DispatchQueue.global(qos: .utility).async { [weak self] in
+                guard let self = self else { return }
+                self.fetchData(query: self.searchText, page: self.pageCount)
+                DispatchQueue.main.async {
+                    self.keepFetching = false
+                }
+            }
+        }
     }
 
     @objc private func textFieldTapped() {
@@ -128,7 +148,11 @@ final class SearchTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as? SearchTableViewCell else {
+            return UITableViewCell()
+        }
+
+        setContentForCell(cell: cell, indexPath: indexPath)
 
         return cell
     }
@@ -155,15 +179,13 @@ final class SearchTableViewController: UITableViewController {
         return headerView
     }
 
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let offSetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
-
         if contentHeight >= scrollView.frame.height {
-            if offSetY > contentHeight - scrollView.frame.height + 150 {
+            if offSetY > contentHeight - scrollView.frame.height + 150 && !keepFetching {
                 pageCount += 1
-                fetchData(query: searchText, page: pageCount)
-                tableView.reloadData()
+                loadMoreData()
             }
         }
 
