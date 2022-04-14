@@ -9,6 +9,7 @@ protocol APIRepositoryType {
     func getTvDetail(id: Int, viewController: UITableViewController, completion: @escaping (TvDetail) -> Void)
     func getGenre(mediaType: MediaType, viewController: UITableViewController, completion: @escaping (Genres) -> Void)
     func getGenreCategory(mediaType: MediaType, viewController: UIViewController, completion: @escaping (Genres) -> Void)
+    func getSearchList(query: String, page: Int, viewController: UITableViewController, completion: @escaping ((Result<ListedItems, Error>)) -> Void)
     func getImage(url: String, completion: @escaping (Result<Data, Error>) -> Void)
 }
 
@@ -87,6 +88,19 @@ class APIRepository: APIRepositoryType {
                 completion(success)
             case .failure(let error):
                 self?.popupErrorCategory(error: error, viewController: viewController)
+            }
+        }
+    }
+
+    func getSearchList(query: String, page: Int, viewController: UITableViewController, completion: @escaping ((Result<ListedItems, Error>)) -> Void) {
+        let endPoint = EndPoint.search(query: query, page: page)
+
+        APICaller.shared.getJSON(endPoint: endPoint) { (result: Result<ListedItems, Error>) in
+            switch result {
+            case .success(let success):
+                completion(.success(success))
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }

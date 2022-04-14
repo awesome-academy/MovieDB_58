@@ -2,24 +2,19 @@ import Foundation
 
 private extension URL {
     static func makeForEndPoints(endpoint: String) -> URL {
-        if let url = URL(string: "\(Constants.baseURL)/\(endpoint)?api_key=\(Constants.apiKey)") {
-            return url
-        }
-        return URL(fileURLWithPath: "")
+        return URL(string: "\(Constants.baseURL)/\(endpoint)?api_key=\(Constants.apiKey)") ?? URL(fileURLWithPath: "")
     }
 
     static func makeForImageEndPoints(endpoint: String) -> URL {
-        if let url = URL(string: "\(Constants.baseImageURL)/\(endpoint)") {
-            return url
-        }
-        return URL(fileURLWithPath: "")
+        return URL(string: "\(Constants.baseImageURL)/\(endpoint)") ?? URL(fileURLWithPath: "")
     }
 
     static func makeForDiscoverEndPoints(endpoint: String) -> URL {
-        if let url = URL(string: "\(Constants.baseDiscoverURL)/\(endpoint)") {
-            return url
-        }
-        return URL(fileURLWithPath: "")
+        return URL(string: "\(Constants.baseDiscoverURL)/\(endpoint)") ?? URL(fileURLWithPath: "")
+    }
+
+    static func makeForSearchEndPoints(endpoint: String) -> URL {
+        return URL(string: "\(Constants.baseSearchURL)\(endpoint)") ?? URL(fileURLWithPath: "")
     }
 }
 
@@ -28,6 +23,7 @@ enum EndPoint {
     case discoverList(mediaType: MediaType, genreId: Int)
     case detail(mediaType: MediaType, id: Int)
     case genre(mediaType: MediaType)
+    case search(query: String, page: Int)
     case image(url: String)
 }
 
@@ -47,6 +43,8 @@ extension EndPoint {
             return .makeForEndPoints(endpoint: "\(mediaType.rawValue)/\(id)")
         case .genre(mediaType: let mediaType):
             return .makeForEndPoints(endpoint: "genre/\(mediaType.rawValue)/list")
+        case .search(query: let query, page: let page):
+            return .makeForSearchEndPoints(endpoint: "?api_key=\(Constants.apiKey)&query=\(query)&page=\(page)")
         case .image(url: let url):
             return .makeForImageEndPoints(endpoint: "\(url)")
         }

@@ -11,6 +11,10 @@ final class SearchTableViewCell: UITableViewCell {
         configCellUI()
     }
 
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+
     private func configCellUI() {
         guard let cellImage = cellImage else {
             return

@@ -4,6 +4,7 @@ struct Constants {
     static let baseURL = "https://api.themoviedb.org/3"
     static let baseImageURL = "https://image.tmdb.org/t/p/w500"
     static let baseDiscoverURL = "https://api.themoviedb.org/3/discover"
+    static let baseSearchURL = "https://api.themoviedb.org/3/search/multi"
     static var apiKey: String {
         var keys: NSDictionary?
         var apiKey = ""
