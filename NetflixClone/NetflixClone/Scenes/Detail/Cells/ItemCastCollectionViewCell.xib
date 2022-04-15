@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ItemCastCollectionViewCell" id="gTV-IL-0wX" customClass="ItemCastCollectionViewCell" customModule="NetflixClone" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="101" height="195"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="101" height="195"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ypb-s6-wQp">
+                        <rect key="frame" x="0.0" y="0.0" width="101" height="195"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeHolder" translatesAutoresizingMaskIntoConstraints="NO" id="FEZ-wf-DUy">
+                                <rect key="frame" x="0.0" y="0.0" width="101" height="145"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="101" id="CXm-AV-Z8V"/>
+                                    <constraint firstAttribute="height" constant="145" id="Uju-u8-AfB"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Xj-Vn-ehk">
+                                <rect key="frame" x="33" y="150" width="35.5" height="16"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Director" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUv-do-wTT">
+                                <rect key="frame" x="24" y="171" width="53" height="16"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="XUv-do-wTT" firstAttribute="top" secondItem="5Xj-Vn-ehk" secondAttribute="bottom" constant="5" id="3L1-NO-qa4"/>
+                            <constraint firstItem="FEZ-wf-DUy" firstAttribute="centerX" secondItem="Ypb-s6-wQp" secondAttribute="centerX" id="G6y-tM-2CO"/>
+                            <constraint firstItem="5Xj-Vn-ehk" firstAttribute="centerX" secondItem="Ypb-s6-wQp" secondAttribute="centerX" id="YQm-ge-alB"/>
+                            <constraint firstItem="FEZ-wf-DUy" firstAttribute="top" secondItem="Ypb-s6-wQp" secondAttribute="top" id="gea-ew-85g"/>
+                            <constraint firstItem="XUv-do-wTT" firstAttribute="centerX" secondItem="Ypb-s6-wQp" secondAttribute="centerX" id="pwu-ZJ-KbQ"/>
+                            <constraint firstItem="5Xj-Vn-ehk" firstAttribute="top" secondItem="FEZ-wf-DUy" secondAttribute="bottom" constant="5" id="pyB-bK-G5l"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="Ypb-s6-wQp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="EQ1-w9-s1C"/>
+                <constraint firstAttribute="trailing" secondItem="Ypb-s6-wQp" secondAttribute="trailing" id="JSo-La-ytf"/>
+                <constraint firstItem="Ypb-s6-wQp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Txn-GT-pv6"/>
+                <constraint firstAttribute="bottom" secondItem="Ypb-s6-wQp" secondAttribute="bottom" id="d5m-Gf-7TP"/>
+            </constraints>
+            <size key="customSize" width="101" height="202"/>
+            <connections>
+                <outlet property="cellCastImage" destination="FEZ-wf-DUy" id="uXx-S6-49J"/>
+                <outlet property="cellCastJob" destination="XUv-do-wTT" id="cIG-Ue-hEJ"/>
+                <outlet property="cellCastName" destination="5Xj-Vn-ehk" id="9SX-9f-Dng"/>
+            </connections>
+            <point key="canvasLocation" x="115.21739130434783" y="127.23214285714285"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="placeHolder" width="1200" height="800"/>
+    </resources>
+</document>

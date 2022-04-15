@@ -23,3 +23,10 @@ enum CategorySection: Int {
     case movie = 1
     case tvShow = 2
 }
+
+enum DetailSection: Int {
+    case itemBanner = 0
+    case itemCast = 1
+    case interact = 2
+    case moreLikeThis = 3
+}
