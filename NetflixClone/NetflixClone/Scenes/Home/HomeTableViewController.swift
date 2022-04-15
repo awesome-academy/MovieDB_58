@@ -12,8 +12,8 @@ final class HomeTableViewController: UITableViewController {
     private let sectionTitles = ["My List", "Trending", "Popular Movie", "Popular TV Show"]
     private var movieEnabled = true
     private var tvShowEnabled = true
-    private var headerItemId = 0
-    private var headerItemIsMovie = true
+    private var headerItemId: Int?
+    private var headerItemIsMovie: Bool?
     private var headerInMyList = false
     private var myList = [ListedItem]()
     private var trendingList = [ListedItem]()
@@ -211,7 +211,9 @@ final class HomeTableViewController: UITableViewController {
             }
         }
         // Header Info
-        headerTitle?.text = self.trendingList[0].name?.uppercased() ?? self.trendingList[0].title?.uppercased()
+        headerItemId = trendingList[0].id
+        headerItemIsMovie = trendingList[0].title != nil ? true : false
+        headerTitle?.text = trendingList[0].name?.uppercased() ?? trendingList[0].title?.uppercased()
         headerGenresArray = getHeaderGenres()
         headerGenresString = headerGenresArray.joined(separator: " • ")
         headerGenres?.text = headerGenresString
@@ -263,7 +265,8 @@ final class HomeTableViewController: UITableViewController {
     private func setContentForCell(cell: HomeTableViewCell, array: [ListedItem]) {
         let posterPathList = getPosterPathFromArray(array: array)
         let idList = getIdFromArray(array: array)
-        cell.configDataHomeCollectionViewCell(idListTemp: idList, posterListTemp: posterPathList)
+        let isMovieList = getIsMovieFromArray(array: array)
+        cell.configDataHomeCollectionViewCell(idListTemp: idList, posterListTemp: posterPathList, isMovieListTemp: isMovieList)
     }
 
     private func getIdFromArray(array: [ListedItem]) -> [Int] {
@@ -280,6 +283,10 @@ final class HomeTableViewController: UITableViewController {
             posterPathList.append(element.posterPath ?? "No value")
         }
         return posterPathList
+    }
+
+    private func getIsMovieFromArray(array: [ListedItem]) -> [Bool] {
+        return array.map { $0.name == nil }
     }
 
     @objc private func itemTapped(_ notification: Notification) {
@@ -308,6 +315,9 @@ final class HomeTableViewController: UITableViewController {
     }
 
     @IBAction private func infoButtonTapped(_ sender: UIButton) {
+        guard let headerItemId = headerItemId else { return }
+        guard let headerItemIsMovie = headerItemIsMovie else { return }
+
         let detailVC = DetailTableViewController(id: headerItemId, isMovie: headerItemIsMovie)
         navigationController?.pushViewController(detailVC, animated: true)
     }
