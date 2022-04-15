@@ -11,6 +11,9 @@ protocol APIRepositoryType {
     func getGenreCategory(mediaType: MediaType, viewController: UIViewController, completion: @escaping (Genres) -> Void)
     func getSearchList(query: String, page: Int, viewController: UITableViewController, completion: @escaping ((Result<ListedItems, Error>)) -> Void)
     func getImage(url: String, completion: @escaping (Result<Data, Error>) -> Void)
+    func getCreditCast(mediaType: CreditMediaType, id: Int, completion: @escaping (Result<Casts, Error>) -> Void)
+    func getCreditCrew(mediaType: CreditMediaType, id: Int, completion: @escaping (Result<Crews, Error>) -> Void)
+    func getSimilarItem(mediaType: CreditMediaType, id: Int, completion: @escaping (Result<ListedItems, Error>) -> Void)
 }
 
 class APIRepository: APIRepositoryType {
@@ -54,7 +57,7 @@ class APIRepository: APIRepositoryType {
     }
 
     func getTvDetail(id: Int, viewController: UITableViewController, completion: @escaping (TvDetail) -> Void) {
-        let endPoint = EndPoint.detail(mediaType: MediaType.movie, id: id)
+        let endPoint = EndPoint.detail(mediaType: MediaType.tvShow, id: id)
 
         APICaller.shared.getJSON(endPoint: endPoint) { [weak self] (result: Result<TvDetail, Error>) in
             switch result {
@@ -109,6 +112,45 @@ class APIRepository: APIRepositoryType {
         let endPoint = EndPoint.image(url: url)
 
         APICaller.shared.getImage(endPoint: endPoint) {(result: Result<Data, Error>) in
+            switch result {
+            case .success(let success):
+                completion(.success(success))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func getCreditCast(mediaType: CreditMediaType, id: Int, completion: @escaping (Result<Casts, Error>) -> Void) {
+        let endPoint = EndPoint.credit(mediaType: mediaType, id: id)
+
+        APICaller.shared.getJSON(endPoint: endPoint) { (result: Result<Casts, Error>) in
+            switch result {
+            case .success(let success):
+                completion(.success(success))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func getCreditCrew(mediaType: CreditMediaType, id: Int, completion: @escaping (Result<Crews, Error>) -> Void) {
+        let endPoint = EndPoint.credit(mediaType: mediaType, id: id)
+
+        APICaller.shared.getJSON(endPoint: endPoint) { (result: Result<Crews, Error>) in
+            switch result {
+            case .success(let success):
+                completion(.success(success))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func getSimilarItem(mediaType: CreditMediaType, id: Int, completion: @escaping (Result<ListedItems, Error>) -> Void) {
+        let endPoint = EndPoint.similarItem(mediaType: mediaType, id: id)
+
+        APICaller.shared.getJSON(endPoint: endPoint) { (result: Result<ListedItems, Error>) in
             switch result {
             case .success(let success):
                 completion(.success(success))

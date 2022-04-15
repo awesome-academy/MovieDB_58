@@ -28,6 +28,6 @@ struct Crew: Codable {
         case profilePath = "profile_path"
         case creditId = "credit_id"
         case department
-        case job
+        case job = "job"
     }
 }

@@ -6,6 +6,11 @@ enum MediaType: String {
     case tvShow = "tv"
 }
 
+enum CreditMediaType: String {
+    case movie = "movie"
+    case tvShow = "tv"
+}
+
 enum ListType: String {
     case trending
     case popular

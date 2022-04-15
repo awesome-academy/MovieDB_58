@@ -19,15 +19,15 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ypb-s6-wQp">
                         <rect key="frame" x="0.0" y="0.0" width="101" height="195"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeHolder" translatesAutoresizingMaskIntoConstraints="NO" id="FEZ-wf-DUy">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeHolder" translatesAutoresizingMaskIntoConstraints="NO" id="FEZ-wf-DUy" customClass="ImageLoader" customModule="NetflixClone" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="101" height="145"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="101" id="CXm-AV-Z8V"/>
                                     <constraint firstAttribute="height" constant="145" id="Uju-u8-AfB"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Xj-Vn-ehk">
-                                <rect key="frame" x="33" y="150" width="35.5" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Director" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Xj-Vn-ehk">
+                                <rect key="frame" x="0.0" y="150" width="101" height="16"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -44,6 +44,8 @@
                             <constraint firstItem="XUv-do-wTT" firstAttribute="top" secondItem="5Xj-Vn-ehk" secondAttribute="bottom" constant="5" id="3L1-NO-qa4"/>
                             <constraint firstItem="FEZ-wf-DUy" firstAttribute="centerX" secondItem="Ypb-s6-wQp" secondAttribute="centerX" id="G6y-tM-2CO"/>
                             <constraint firstItem="5Xj-Vn-ehk" firstAttribute="centerX" secondItem="Ypb-s6-wQp" secondAttribute="centerX" id="YQm-ge-alB"/>
+                            <constraint firstItem="5Xj-Vn-ehk" firstAttribute="leading" secondItem="Ypb-s6-wQp" secondAttribute="leading" id="ZHt-wb-Ctm"/>
+                            <constraint firstAttribute="trailing" secondItem="5Xj-Vn-ehk" secondAttribute="trailing" id="atb-jh-ouP"/>
                             <constraint firstItem="FEZ-wf-DUy" firstAttribute="top" secondItem="Ypb-s6-wQp" secondAttribute="top" id="gea-ew-85g"/>
                             <constraint firstItem="XUv-do-wTT" firstAttribute="centerX" secondItem="Ypb-s6-wQp" secondAttribute="centerX" id="pwu-ZJ-KbQ"/>
                             <constraint firstItem="5Xj-Vn-ehk" firstAttribute="top" secondItem="FEZ-wf-DUy" secondAttribute="bottom" constant="5" id="pyB-bK-G5l"/>
