@@ -1,11 +1,12 @@
 import UIKit
+import YoutubePlayer_in_WKWebView
 
 protocol ItemBannerCellDelegate {
     func seeMoreTapped()
 }
 
 final class ItemBannerTableViewCell: UITableViewCell, ReuseableView {
-    @IBOutlet weak var videoPlayerView: UIView?
+    @IBOutlet weak var videoPlayerView: WKYTPlayerView?
     @IBOutlet weak var cellBanner: UIImageView?
     @IBOutlet weak var cellItemTitle: UILabel?
     @IBOutlet weak var cellItemYear: UILabel?
@@ -17,6 +18,7 @@ final class ItemBannerTableViewCell: UITableViewCell, ReuseableView {
     @IBOutlet weak var cellSeemoreButton: UIButton?
 
     private var isPlaying = false
+    var itemTrailerId = ""
     var itemBannerCellDelegate: ItemBannerCellDelegate?
 
     override func awakeFromNib() {
@@ -34,14 +36,26 @@ final class ItemBannerTableViewCell: UITableViewCell, ReuseableView {
     private func configUICell() {
         cellItemRatedR?.layer.cornerRadius = 2
         cellPlayButton?.layer.cornerRadius = 5
+        videoPlayerView?.delegate = self
     }
 
     @IBAction func playTapped(_ sender: Any) {
         cellBanner?.isHidden = isPlaying
+        if isPlaying {
+            videoPlayerView?.load(withVideoId: itemTrailerId)
+        } else {
+            videoPlayerView?.stopVideo()
+        }
         isPlaying = !isPlaying
     }
 
     @IBAction func seeMoreTapped(_ sender: UIButton) {
         itemBannerCellDelegate?.seeMoreTapped()
+    }
+}
+
+extension ItemBannerTableViewCell: WKYTPlayerViewDelegate {
+    func playerViewDidBecomeReady(_ playerView: WKYTPlayerView) {
+        playerView.playVideo()
     }
 }

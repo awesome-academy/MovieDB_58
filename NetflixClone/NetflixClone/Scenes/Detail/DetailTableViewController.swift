@@ -11,6 +11,7 @@ final class DetailTableViewController: UITableViewController {
     private var itemId: Int = 0
     private var itemIsMovie = false
     private var itemOverview = ""
+    private var itemTrailerId = ""
     private var casts = [Cast]()
     private var crews = [Crew]()
     private var directorName: String?
@@ -184,6 +185,7 @@ final class DetailTableViewController: UITableViewController {
         cell.cellItemGenres?.text = itemGenresText
         cell.cellItemDescription?.text = itemOverview
         cell.cellItemGenres?.text = itemGenresText
+        cell.itemTrailerId = self.itemTrailerId
         setBannerImage(cell: cell)
     }
 
