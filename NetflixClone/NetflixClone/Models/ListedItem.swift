@@ -32,8 +32,8 @@ struct ListedItem: Codable {
         case originalTitle = "original_title"
         case originalName = "original_name"
         case originalLanguage = "original_language"
-        case title
-        case name
+        case title = "title"
+        case name = "name"
         case backdropPath = "backdrop_path"
         case popularity
         case voteCount = "vote_count"

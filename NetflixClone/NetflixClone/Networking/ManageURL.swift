@@ -16,6 +16,13 @@ private extension URL {
     static func makeForSearchEndPoints(endpoint: String) -> URL {
         return URL(string: "\(Constants.baseSearchURL)\(endpoint)") ?? URL(fileURLWithPath: "")
     }
+
+    static func makeForCredit(endpoint: String) -> URL {
+        return URL(string: "\(Constants.baseURL)/\(endpoint)") ?? URL(fileURLWithPath: "")
+    }
+    static func makeForSimilarItem(endpoint: String) -> URL {
+        return URL(string: "\(Constants.baseURL)/\(endpoint)") ?? URL(fileURLWithPath: "")
+    }
 }
 
 enum EndPoint {
@@ -25,6 +32,8 @@ enum EndPoint {
     case genre(mediaType: MediaType)
     case search(query: String, page: Int)
     case image(url: String)
+    case credit(mediaType: CreditMediaType, id: Int)
+    case similarItem(mediaType: CreditMediaType, id: Int)
 }
 
 extension EndPoint {
@@ -47,6 +56,10 @@ extension EndPoint {
             return .makeForSearchEndPoints(endpoint: "?api_key=\(Constants.apiKey)&query=\(query)&page=\(page)")
         case .image(url: let url):
             return .makeForImageEndPoints(endpoint: "\(url)")
+        case .credit(mediaType: let mediaType, id: let id):
+            return .makeForCredit(endpoint: "\(mediaType.rawValue)/\(id)/credits?api_key=\(Constants.apiKey)")
+        case .similarItem(mediaType: let mediaType, id: let id):
+            return .makeForSimilarItem(endpoint: "\(mediaType.rawValue)/\(id)/similar?api_key=\(Constants.apiKey)")
         }
     }
 }

@@ -50,7 +50,7 @@ final class SearchTableViewController: UITableViewController {
                             self.createAlert()
                         }
                     } else {
-                        self.searchResults.append(contentsOf: listedArray.results)
+                        self.searchResults += listedArray.results
                     }
                 case .failure(let error):
                     self.popupError(error: error, viewController: self)
@@ -67,7 +67,10 @@ final class SearchTableViewController: UITableViewController {
 
     private func createAlert() {
         let alert = UIAlertController(title: "Error", message: "End of List!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.tableView.reloadData()
+        }))
         present(alert, animated: true)
     }
 
@@ -82,6 +85,8 @@ final class SearchTableViewController: UITableViewController {
     private func setContentForCell(cell: SearchTableViewCell, indexPath: IndexPath) {
         guard let posterPath = searchResults[indexPath.row].posterPath else { return }
         guard let name = searchResults[indexPath.row].name ?? searchResults[indexPath.row].title else { return }
+
+        cell.selectionStyle = .none
         cell.cellImage?.setImageByUrl(url: posterPath)
         cell.cellLabel?.text = name
     }
@@ -159,7 +164,7 @@ final class SearchTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        itemTapped(id: searchResults[indexPath.row].id, isMovie: searchResults[indexPath.row].name != nil)
+        itemTapped(id: searchResults[indexPath.row].id, isMovie: searchResults[indexPath.row].title != nil)
     }
 
     // MARK: - Table view delegate

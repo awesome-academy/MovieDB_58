@@ -2,6 +2,9 @@ import UIKit
 
 final class MoreLikeThisTableViewCell: UITableViewCell, ReuseableView {
     @IBOutlet private weak var collectionView: UICollectionView?
+    private var itemPosterList = [String]()
+    private var itemIdList = [Int]()
+    private var itemIsMovieList = [Bool]()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,7 +25,6 @@ final class MoreLikeThisTableViewCell: UITableViewCell, ReuseableView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        guard let collectionView = collectionView else { return }
         contentView.backgroundColor = .black
     }
 
@@ -45,6 +47,16 @@ final class MoreLikeThisTableViewCell: UITableViewCell, ReuseableView {
     private func configUICell(cell: UICollectionViewCell) {
         cell.layer.cornerRadius = 5
     }
+
+    func configDataMoreLikeThisCollectionViewCell(moreLikeThisPosterList: [String], moreLikeThisIdList: [Int], moreLikeThisIsMovieList: [Bool]) {
+        itemPosterList = moreLikeThisPosterList
+        itemIdList = moreLikeThisIdList
+        itemIsMovieList = moreLikeThisIsMovieList
+    }
+
+    private func setContentForCell(cell: ListCollectionViewCell, indexPath: IndexPath) {
+        cell.cellImage?.setImageByUrl(url: self.itemPosterList[indexPath.item])
+    }
 }
 
 extension MoreLikeThisTableViewCell: UICollectionViewDataSource {
@@ -58,6 +70,7 @@ extension MoreLikeThisTableViewCell: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         configUICell(cell: cell)
+        setContentForCell(cell: cell, indexPath: indexPath)
 
         return cell
     }

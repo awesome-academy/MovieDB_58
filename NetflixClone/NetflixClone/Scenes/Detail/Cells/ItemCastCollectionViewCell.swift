@@ -1,7 +1,7 @@
 import UIKit
 
 final class ItemCastCollectionViewCell: UICollectionViewCell, ReuseableView {
-    @IBOutlet weak var cellCastImage: UIImageView?
+    @IBOutlet weak var cellCastImage: ImageLoader?
     @IBOutlet weak var cellCastName: UILabel?
     @IBOutlet weak var cellCastJob: UILabel?
 
@@ -16,7 +16,7 @@ final class ItemCastCollectionViewCell: UICollectionViewCell, ReuseableView {
         cellCastImage?.layer.cornerRadius = 5
     }
 
-    func configCastJobLabel(indexPath: IndexPath) {
+    func configCastJobLabel(indexPath: IndexPath, directorName: String?) {
         if indexPath.item != 0 {
             cellCastJob?.isHidden = true
         }

@@ -1,8 +1,6 @@
 import UIKit
 
 final class HomeTableViewCell: UITableViewCell, ReuseableView {
-    private var itemId: Int = 1
-    private var itemIsMovie = false
     private var idList = [Int]()
     private var posterList = [String]()
     private var isMovieList = [Bool]()
@@ -49,10 +47,6 @@ final class HomeTableViewCell: UITableViewCell, ReuseableView {
 
     private func setContentForCell(cell: ListCollectionViewCell, id: Int, posterPath: String, isMovie: Bool) {
         cell.cellImage?.setImageByUrl(url: posterPath)
-        itemId = id
-        itemIsMovie = isMovie
-        itemIsMovie = isMovie
-
     }
 }
 
@@ -76,7 +70,7 @@ extension HomeTableViewCell: UICollectionViewDataSource {
 extension HomeTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let notiName = Notification.Name(rawValue: "com.Turacle.itemTapped")
-        let userInfo = ["userInfo": ["id": itemId, "isMovie": itemIsMovie]]
+        let userInfo = ["userInfo": ["id": idList[indexPath.item], "isMovie": isMovieList[indexPath.item]]]
         NotificationCenter.default.post(name: notiName, object: nil, userInfo: userInfo)
     }
 }
