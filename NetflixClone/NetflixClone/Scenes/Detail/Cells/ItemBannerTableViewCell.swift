@@ -1,11 +1,12 @@
 import UIKit
+import YoutubePlayer_in_WKWebView
 
 protocol ItemBannerCellDelegate {
     func seeMoreTapped()
 }
 
 final class ItemBannerTableViewCell: UITableViewCell, ReuseableView {
-    @IBOutlet weak var videoPlayerView: UIView?
+    @IBOutlet weak var videoPlayerView: WKYTPlayerView?
     @IBOutlet weak var cellBanner: UIImageView?
     @IBOutlet weak var cellItemTitle: UILabel?
     @IBOutlet weak var cellItemYear: UILabel?

@@ -44,6 +44,7 @@
 		DFA5BAD128093D7500148290 /* MoreLikeThisTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFA5BAD028093D7500148290 /* MoreLikeThisTableViewCell.xib */; };
 		DFA5BAD4280CFCB300148290 /* SeeMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA5BAD2280CFCB300148290 /* SeeMoreViewController.swift */; };
 		DFA5BAD5280CFCB300148290 /* SeeMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFA5BAD3280CFCB300148290 /* SeeMoreViewController.xib */; };
+		DFA5BAD8280D1D7000148290 /* YoutubePlayer-in-WKWebView in Frameworks */ = {isa = PBXBuildFile; productRef = DFA5BAD7280D1D7000148290 /* YoutubePlayer-in-WKWebView */; };
 		DFBF496927FC231200140F00 /* ListedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF496827FC231200140F00 /* ListedItem.swift */; };
 		DFE6E1C4280445020025D737 /* NotificationCenterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6E1C3280445020025D737 /* NotificationCenterExtension.swift */; };
 		DFE6E1CD28044E440025D737 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6E1CC28044E440025D737 /* CategoryTableViewCell.swift */; };
@@ -125,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFA5BAD8280D1D7000148290 /* YoutubePlayer-in-WKWebView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +379,9 @@
 			dependencies = (
 			);
 			name = NetflixClone;
+			packageProductDependencies = (
+				DFA5BAD7280D1D7000148290 /* YoutubePlayer-in-WKWebView */,
+			);
 			productName = NetflixClone;
 			productReference = DF464BB627FAD79F004310C8 /* NetflixClone.app */;
 			productType = "com.apple.product-type.application";
@@ -405,6 +410,9 @@
 				Base,
 			);
 			mainGroup = DF464BAD27FAD79F004310C8;
+			packageReferences = (
+				DFA5BAD6280D1D7000148290 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */,
+			);
 			productRefGroup = DF464BB727FAD79F004310C8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -724,6 +732,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DFA5BAD6280D1D7000148290 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmhv/YoutubePlayer-in-WKWebView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.8;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DFA5BAD7280D1D7000148290 /* YoutubePlayer-in-WKWebView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DFA5BAD6280D1D7000148290 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */;
+			productName = "YoutubePlayer-in-WKWebView";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DF464BAE27FAD79F004310C8 /* Project object */;
 }
