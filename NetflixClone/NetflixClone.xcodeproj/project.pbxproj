@@ -42,6 +42,8 @@
 		DFA5BAC52809208E00148290 /* MoreLikeThisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA5BAC42809208E00148290 /* MoreLikeThisTableViewCell.swift */; };
 		DFA5BACF2809351B00148290 /* ItemCastTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFA5BACE2809351B00148290 /* ItemCastTableViewCell.xib */; };
 		DFA5BAD128093D7500148290 /* MoreLikeThisTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFA5BAD028093D7500148290 /* MoreLikeThisTableViewCell.xib */; };
+		DFA5BAD4280CFCB300148290 /* SeeMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA5BAD2280CFCB300148290 /* SeeMoreViewController.swift */; };
+		DFA5BAD5280CFCB300148290 /* SeeMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFA5BAD3280CFCB300148290 /* SeeMoreViewController.xib */; };
 		DFBF496927FC231200140F00 /* ListedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF496827FC231200140F00 /* ListedItem.swift */; };
 		DFE6E1C4280445020025D737 /* NotificationCenterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6E1C3280445020025D737 /* NotificationCenterExtension.swift */; };
 		DFE6E1CD28044E440025D737 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6E1CC28044E440025D737 /* CategoryTableViewCell.swift */; };
@@ -98,6 +100,8 @@
 		DFA5BAC42809208E00148290 /* MoreLikeThisTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreLikeThisTableViewCell.swift; sourceTree = "<group>"; };
 		DFA5BACE2809351B00148290 /* ItemCastTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemCastTableViewCell.xib; sourceTree = "<group>"; };
 		DFA5BAD028093D7500148290 /* MoreLikeThisTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoreLikeThisTableViewCell.xib; sourceTree = "<group>"; };
+		DFA5BAD2280CFCB300148290 /* SeeMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreViewController.swift; sourceTree = "<group>"; };
+		DFA5BAD3280CFCB300148290 /* SeeMoreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeeMoreViewController.xib; sourceTree = "<group>"; };
 		DFBF496827FC231200140F00 /* ListedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListedItem.swift; sourceTree = "<group>"; };
 		DFE6E1C3280445020025D737 /* NotificationCenterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterExtension.swift; sourceTree = "<group>"; };
 		DFE6E1CC28044E440025D737 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -340,6 +344,8 @@
 		DFFD9DF32808FE1400079E85 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				DFA5BAD2280CFCB300148290 /* SeeMoreViewController.swift */,
+				DFA5BAD3280CFCB300148290 /* SeeMoreViewController.xib */,
 				DFFD9DF42808FE6B00079E85 /* ItemBannerTableViewCell.swift */,
 				DFFD9DF52808FE6B00079E85 /* ItemBannerTableViewCell.xib */,
 				DFFD9DF8280911B500079E85 /* ItemCastTableViewCell.swift */,
@@ -416,6 +422,7 @@
 				DF49F14027FE722A00628E79 /* Keys.plist in Resources */,
 				DF49F14A27FEE83000628E79 /* SectionHeaderCell.xib in Resources */,
 				DFE6E1D42805218F0025D737 /* ListCollectionViewCell.xib in Resources */,
+				DFA5BAD5280CFCB300148290 /* SeeMoreViewController.xib in Resources */,
 				DFA5BACF2809351B00148290 /* ItemCastTableViewCell.xib in Resources */,
 				DF464BC627FAD7A5004310C8 /* LaunchScreen.storyboard in Resources */,
 				DFA5BAD128093D7500148290 /* MoreLikeThisTableViewCell.xib in Resources */,
@@ -485,6 +492,7 @@
 				DFFD9DF9280911B500079E85 /* ItemCastTableViewCell.swift in Sources */,
 				DF464BBC27FAD7A0004310C8 /* SceneDelegate.swift in Sources */,
 				DFE6E1D32805218F0025D737 /* ListCollectionViewCell.swift in Sources */,
+				DFA5BAD4280CFCB300148290 /* SeeMoreViewController.swift in Sources */,
 				DF49F12C27FD1E1900628E79 /* Cast.swift in Sources */,
 				DF49F12A27FD1C6600628E79 /* TvDetail.swift in Sources */,
 				DF49F13627FD4C8400628E79 /* CreatedBy.swift in Sources */,
