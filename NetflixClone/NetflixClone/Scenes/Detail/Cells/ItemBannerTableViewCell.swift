@@ -18,6 +18,7 @@ final class ItemBannerTableViewCell: UITableViewCell, ReuseableView {
     @IBOutlet weak var cellSeemoreButton: UIButton?
 
     private var isPlaying = false
+    var videoId = ""
     var itemBannerCellDelegate: ItemBannerCellDelegate?
 
     override func awakeFromNib() {
@@ -39,6 +40,9 @@ final class ItemBannerTableViewCell: UITableViewCell, ReuseableView {
 
     @IBAction func playTapped(_ sender: Any) {
         cellBanner?.isHidden = isPlaying
+        if isPlaying {
+            videoPlayerView?.load(withVideoId: videoId)
+        }
         isPlaying = !isPlaying
     }
 

@@ -17,6 +17,7 @@ final class DetailTableViewController: UITableViewController {
     private var directorPosterPath: String?
     private var inMyList = false
     private var moreLikeThisList = [ListedItem]()
+    private var videoList = [Video]()
 
     init(id: Int, isMovie: Bool) {
         super.init(nibName: nil, bundle: nil)
@@ -87,6 +88,18 @@ final class DetailTableViewController: UITableViewController {
                 case .failure(let failure):
                     self.popupErrorCategory(error: failure, viewController: self)
                 }
+                group.leave()
+            }
+
+            group.enter()
+            apiRepo.getVideo(mediaType: mediaType, id: self.itemId) { (results: Result<Videos, Error>) in
+                switch results {
+                case .success(let success):
+                    self.videoList.append(contentsOf: success.results)
+                case .failure(let failure):
+                    self.popupErrorCategory(error: failure, viewController: self)
+                }
+                group.leave()
             }
             // Update UI
             group.notify(queue: .main) {
@@ -168,6 +181,12 @@ final class DetailTableViewController: UITableViewController {
         }
     }
 
+    private func getItemTrailerKey(array: [Video]) -> String {
+        let trailerVideo = array.filter { $0.type == "Trailer" }.first
+        guard let trailerKey = trailerVideo?.key else { return "" }
+        return trailerKey
+    }
+
     private func setContentForItemBannerCell(cell: ItemBannerTableViewCell) {
         cell.itemBannerCellDelegate = self
         if itemBackDrop.isEmpty {
@@ -185,6 +204,7 @@ final class DetailTableViewController: UITableViewController {
         cell.cellItemDescription?.text = itemOverview
         cell.cellItemGenres?.text = itemGenresText
         setBannerImage(cell: cell)
+        cell.videoId = getItemTrailerKey(array: videoList)
     }
 
     private func getCastPosterPathFromArray(array: [Cast]) -> [String] {

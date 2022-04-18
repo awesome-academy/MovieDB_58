@@ -23,6 +23,9 @@ private extension URL {
     static func makeForSimilarItem(endpoint: String) -> URL {
         return URL(string: "\(Constants.baseURL)/\(endpoint)") ?? URL(fileURLWithPath: "")
     }
+    static func makeForVideo(endpoint: String) -> URL {
+        return URL(string: "\(Constants.baseURL)/\(endpoint)") ?? URL(fileURLWithPath: "")
+    }
 }
 
 enum EndPoint {
@@ -34,6 +37,7 @@ enum EndPoint {
     case image(url: String)
     case credit(mediaType: CreditMediaType, id: Int)
     case similarItem(mediaType: CreditMediaType, id: Int)
+    case video(mediaType: CreditMediaType, id: Int)
 }
 
 extension EndPoint {
@@ -60,6 +64,8 @@ extension EndPoint {
             return .makeForCredit(endpoint: "\(mediaType.rawValue)/\(id)/credits?api_key=\(Constants.apiKey)")
         case .similarItem(mediaType: let mediaType, id: let id):
             return .makeForSimilarItem(endpoint: "\(mediaType.rawValue)/\(id)/similar?api_key=\(Constants.apiKey)")
+        case .video(mediaType: let mediaType, id: let id):
+            return .makeForVideo(endpoint: "\(mediaType.rawValue)/\(id)/videos?api_key=\(Constants.apiKey)")
         }
     }
 }
