@@ -163,7 +163,7 @@ final class SearchTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: false)
         itemTapped(id: searchResults[indexPath.row].id, isMovie: searchResults[indexPath.row].title != nil)
     }
 

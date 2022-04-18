@@ -1,5 +1,9 @@
 import UIKit
 
+protocol ItemBannerCellDelegate {
+    func seeMoreTapped()
+}
+
 final class ItemBannerTableViewCell: UITableViewCell, ReuseableView {
     @IBOutlet weak var videoPlayerView: UIView?
     @IBOutlet weak var cellBanner: UIImageView?
@@ -11,6 +15,9 @@ final class ItemBannerTableViewCell: UITableViewCell, ReuseableView {
     @IBOutlet weak var cellPlayButton: UIButton?
     @IBOutlet weak var cellItemDescription: UILabel?
     @IBOutlet weak var cellSeemoreButton: UIButton?
+
+    private var isPlaying = false
+    var itemBannerCellDelegate: ItemBannerCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,5 +34,14 @@ final class ItemBannerTableViewCell: UITableViewCell, ReuseableView {
     private func configUICell() {
         cellItemRatedR?.layer.cornerRadius = 2
         cellPlayButton?.layer.cornerRadius = 5
+    }
+
+    @IBAction func playTapped(_ sender: Any) {
+        cellBanner?.isHidden = isPlaying
+        isPlaying = !isPlaying
+    }
+
+    @IBAction func seeMoreTapped(_ sender: UIButton) {
+        itemBannerCellDelegate?.seeMoreTapped()
     }
 }

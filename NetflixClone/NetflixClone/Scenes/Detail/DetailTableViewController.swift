@@ -45,6 +45,7 @@ final class DetailTableViewController: UITableViewController {
 
     private func configView() {
         view.backgroundColor = .black
+        navigationItem.backButtonTitle = ""
         tableView.backgroundColor = .black
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
@@ -168,6 +169,7 @@ final class DetailTableViewController: UITableViewController {
     }
 
     private func setContentForItemBannerCell(cell: ItemBannerTableViewCell) {
+        cell.itemBannerCellDelegate = self
         if itemBackDrop.isEmpty {
             tableView.reloadData()
             if casts.isEmpty {
@@ -263,6 +265,7 @@ final class DetailTableViewController: UITableViewController {
         let moreLikeThisIdList = getMoreLikeThisIdFromArray(array: moreLikeThisArray)
         let moreLikeThisIsMovieList = getMoreLikeThisIsMovieFromArray(array: moreLikeThisArray)
 
+        cell.moreLikeThisCellDelegate = self
         cell.configDataMoreLikeThisCollectionViewCell(moreLikeThisPosterList: moreLikeThisPoterList, moreLikeThisIdList: moreLikeThisIdList, moreLikeThisIsMovieList: moreLikeThisIsMovieList)
     }
 
@@ -305,8 +308,6 @@ final class DetailTableViewController: UITableViewController {
             setContentForMoreLikeThisCell(cell: cell, moreLikeThisArray: moreLikeThisList)
             return cell
         }
-
-        return UITableViewCell()
     }
 
     // MARK: - Table view delegate
@@ -330,5 +331,22 @@ final class DetailTableViewController: UITableViewController {
             print("Reload")
             tableView.reloadData()
         }
+    }
+}
+
+extension DetailTableViewController: ItemBannerCellDelegate {
+    func seeMoreTapped() {
+        let seeMoreVC = SeeMoreViewController(genres: itemGenresText, overview: itemOverview)
+        seeMoreVC.isModalInPresentation = true
+        navigationController?.pushViewController(seeMoreVC, animated: true)
+    }
+}
+
+extension DetailTableViewController: MoreLikeThisCellDelegate {
+    func itemTapped(indexPath: IndexPath) {
+        let moreLikeThisItemId = moreLikeThisList[indexPath.item].id
+        let moreLikeThisItemIsMovie = moreLikeThisList[indexPath.item].title != nil ? true : false
+        let detailVC = DetailTableViewController(id: moreLikeThisItemId, isMovie: moreLikeThisItemIsMovie)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }

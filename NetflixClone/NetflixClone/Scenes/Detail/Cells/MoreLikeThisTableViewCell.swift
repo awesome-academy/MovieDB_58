@@ -1,10 +1,15 @@
 import UIKit
 
+protocol MoreLikeThisCellDelegate {
+    func itemTapped(indexPath: IndexPath)
+}
+
 final class MoreLikeThisTableViewCell: UITableViewCell, ReuseableView {
     @IBOutlet private weak var collectionView: UICollectionView?
     private var itemPosterList = [String]()
     private var itemIdList = [Int]()
     private var itemIsMovieList = [Bool]()
+    var moreLikeThisCellDelegate: MoreLikeThisCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -55,6 +60,10 @@ final class MoreLikeThisTableViewCell: UITableViewCell, ReuseableView {
     }
 
     private func setContentForCell(cell: ListCollectionViewCell, indexPath: IndexPath) {
+        if itemPosterList.isEmpty {
+            collectionView?.reloadData()
+            return
+        }
         cell.cellImage?.setImageByUrl(url: self.itemPosterList[indexPath.item])
     }
 }
@@ -78,6 +87,7 @@ extension MoreLikeThisTableViewCell: UICollectionViewDataSource {
 
 extension MoreLikeThisTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
+        moreLikeThisCellDelegate?.itemTapped(indexPath: indexPath)
+        collectionView.deselectItem(at: indexPath, animated: false)
     }
 }
