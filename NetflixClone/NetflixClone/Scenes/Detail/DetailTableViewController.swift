@@ -18,11 +18,13 @@ final class DetailTableViewController: UITableViewController {
     private var inMyList = false
     private var moreLikeThisList = [ListedItem]()
     private var videoList = [Video]()
+    private var playVideo: Bool?
 
-    init(id: Int, isMovie: Bool) {
+    init(id: Int, isMovie: Bool, playVideo: Bool) {
         super.init(nibName: nil, bundle: nil)
         self.itemId = id
         self.itemIsMovie = isMovie
+        self.playVideo = playVideo
     }
 
     private enum LayoutOptions {
@@ -205,6 +207,7 @@ final class DetailTableViewController: UITableViewController {
         cell.cellItemGenres?.text = itemGenresText
         setBannerImage(cell: cell)
         cell.videoId = getItemTrailerKey(array: videoList)
+        cell.playVideo = playVideo ?? false
     }
 
     private func getCastPosterPathFromArray(array: [Cast]) -> [String] {
@@ -366,7 +369,7 @@ extension DetailTableViewController: MoreLikeThisCellDelegate {
     func itemTapped(indexPath: IndexPath) {
         let moreLikeThisItemId = moreLikeThisList[indexPath.item].id
         let moreLikeThisItemIsMovie = moreLikeThisList[indexPath.item].title != nil ? true : false
-        let detailVC = DetailTableViewController(id: moreLikeThisItemId, isMovie: moreLikeThisItemIsMovie)
+        let detailVC = DetailTableViewController(id: moreLikeThisItemId, isMovie: moreLikeThisItemIsMovie, playVideo: false)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

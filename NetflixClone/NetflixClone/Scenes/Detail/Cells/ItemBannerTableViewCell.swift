@@ -6,7 +6,7 @@ protocol ItemBannerCellDelegate {
 }
 
 final class ItemBannerTableViewCell: UITableViewCell, ReuseableView {
-    @IBOutlet weak var videoPlayerView: WKYTPlayerView?
+    @IBOutlet weak var videoPlayerView: VideoView?
     @IBOutlet weak var cellBanner: UIImageView?
     @IBOutlet weak var cellItemTitle: UILabel?
     @IBOutlet weak var cellItemYear: UILabel?
@@ -17,7 +17,8 @@ final class ItemBannerTableViewCell: UITableViewCell, ReuseableView {
     @IBOutlet weak var cellItemDescription: UILabel?
     @IBOutlet weak var cellSeemoreButton: UIButton?
 
-    private var isPlaying = false
+    private var isPlaying = true
+    var playVideo: Bool?
     var videoId = ""
     var itemBannerCellDelegate: ItemBannerCellDelegate?
 
@@ -36,17 +37,29 @@ final class ItemBannerTableViewCell: UITableViewCell, ReuseableView {
     private func configUICell() {
         cellItemRatedR?.layer.cornerRadius = 2
         cellPlayButton?.layer.cornerRadius = 5
+        videoPlayerView?.delegate = self
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) { [weak self] in
+            guard let self = self,
+                  let playVideo = self.playVideo,
+                  let cellBanner = self.cellBanner
+            else { return }
+
+            self.videoPlayerView?.playVideo(cellBanner: cellBanner, playVideo: playVideo, isPlaying: &self.isPlaying, videoId: self.videoId)
+        }
     }
 
-    @IBAction func playTapped(_ sender: Any) {
-        cellBanner?.isHidden = isPlaying
-        if isPlaying {
-            videoPlayerView?.load(withVideoId: videoId)
-        }
-        isPlaying = !isPlaying
+    @IBAction func playTapped(_ sender: UIButton) {
+        guard let cellBanner = self.cellBanner else { return }
+        videoPlayerView?.playButtonTapped(cellBanner: cellBanner, isPlaying: &self.isPlaying, videoId: self.videoId)
     }
 
     @IBAction func seeMoreTapped(_ sender: UIButton) {
         itemBannerCellDelegate?.seeMoreTapped()
+    }
+}
+
+extension ItemBannerTableViewCell: WKYTPlayerViewDelegate {
+    func playerViewDidBecomeReady(_ playerView: WKYTPlayerView) {
+        videoPlayerView?.playVideo()
     }
 }

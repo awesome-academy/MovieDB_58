@@ -89,10 +89,11 @@ final class SearchTableViewController: UITableViewController {
         cell.selectionStyle = .none
         cell.cellImage?.setImageByUrl(url: posterPath)
         cell.cellLabel?.text = name
+        cell.cellPlayButton?.tag = indexPath.row
     }
 
     private func itemTapped(id: Int, isMovie: Bool) {
-        let detailVC = DetailTableViewController(id: id, isMovie: isMovie)
+        let detailVC = DetailTableViewController(id: id, isMovie: isMovie, playVideo: false)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 
@@ -107,6 +108,15 @@ final class SearchTableViewController: UITableViewController {
                 }
             }
         }
+    }
+
+    @IBAction func playButtonTapped(_ sender: UIButton) {
+        let buttonTag = sender.tag
+        let itemId = searchResults[buttonTag].id
+        let itemIsMovie = searchResults[buttonTag].title != nil ? true : false
+
+        let detailVC = DetailTableViewController(id: itemId, isMovie: itemIsMovie, playVideo: true)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 
     @objc private func textFieldTapped() {
