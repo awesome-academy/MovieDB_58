@@ -296,7 +296,7 @@ final class HomeTableViewController: UITableViewController {
             itemId = userInfo["id"] as? Int ?? 0
             isMovie = userInfo["isMovie"] as? Bool ?? true
         }
-        let detailVC = DetailTableViewController(id: itemId, isMovie: isMovie)
+        let detailVC = DetailTableViewController(id: itemId, isMovie: isMovie, playVideo: false)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 
@@ -318,7 +318,7 @@ final class HomeTableViewController: UITableViewController {
         guard let headerItemId = headerItemId else { return }
         guard let headerItemIsMovie = headerItemIsMovie else { return }
 
-        let detailVC = DetailTableViewController(id: headerItemId, isMovie: headerItemIsMovie)
+        let detailVC = DetailTableViewController(id: headerItemId, isMovie: headerItemIsMovie, playVideo: false)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 
@@ -362,7 +362,12 @@ final class HomeTableViewController: UITableViewController {
     }
 
     @IBAction private func playButtonTapped(_ sender: UIButton) {
-        print("Play header item trailer video on youtube!")
+        guard let headerItemId = headerItemId,
+              let headerItemIsMovie = headerItemIsMovie
+        else { return }
+
+        let detailVC = DetailTableViewController(id: headerItemId, isMovie: headerItemIsMovie, playVideo: true)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 
     // MARK: - Table view data source
