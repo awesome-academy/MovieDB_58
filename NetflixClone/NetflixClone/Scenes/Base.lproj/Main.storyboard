@@ -491,22 +491,51 @@
             </objects>
             <point key="canvasLocation" x="254" y="826"/>
         </scene>
-        <!--My List-->
+        <!--My List Table View Controller-->
         <scene sceneID="vkq-s2-RE8">
             <objects>
                 <tableViewController id="AHb-yn-AF4" customClass="MyListTableViewController" customModule="NetflixClone" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="z8E-CO-BIa">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="z8E-CO-BIa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyListCell" id="kTa-pH-6gK">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyListTableViewCell" rowHeight="121" id="yMI-4W-eQa" customClass="MyListTableViewCell" customModule="NetflixClone" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="49.5" width="414" height="121"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kTa-pH-6gK" id="PNE-0I-cEk">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yMI-4W-eQa" id="myA-E6-tjE">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="121"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeHolder" translatesAutoresizingMaskIntoConstraints="NO" id="asq-rc-GCZ" customClass="ImageLoader" customModule="NetflixClone" customModuleProvider="target">
+                                            <rect key="frame" x="15" y="0.0" width="143" height="77"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="77" id="8Nt-2X-pz7"/>
+                                                <constraint firstAttribute="width" constant="143" id="bzW-wh-Gvp"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1k6-94-HVg">
+                                            <rect key="frame" x="178" y="28" width="134" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="134" id="uJE-eq-zx1"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="asq-rc-GCZ" firstAttribute="leading" secondItem="myA-E6-tjE" secondAttribute="leading" constant="15" id="3Zl-Ix-fFD"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1k6-94-HVg" secondAttribute="trailing" constant="20" symbolic="YES" id="KO3-xW-ynC"/>
+                                        <constraint firstItem="asq-rc-GCZ" firstAttribute="top" secondItem="myA-E6-tjE" secondAttribute="top" id="Qid-Al-dwK"/>
+                                        <constraint firstItem="1k6-94-HVg" firstAttribute="centerY" secondItem="asq-rc-GCZ" secondAttribute="centerY" id="dfX-wG-jMb"/>
+                                        <constraint firstItem="1k6-94-HVg" firstAttribute="leading" secondItem="asq-rc-GCZ" secondAttribute="trailing" constant="20" id="p2B-Ub-Tpr"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cellImage" destination="asq-rc-GCZ" id="aQC-5H-Ooe"/>
+                                    <outlet property="cellLabel" destination="1k6-94-HVg" id="hWf-yU-Fet"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -514,13 +543,11 @@
                             <outlet property="delegate" destination="AHb-yn-AF4" id="e9l-XZ-gPH"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="My List" image="MyListIcon" id="Us9-mw-OVw">
-                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="We3-k6-31E"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y05-Sv-LTc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1071" y="826"/>
+            <point key="canvasLocation" x="1069.5652173913045" y="1595.7589285714284"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Tpw-5b-TS9">
@@ -538,7 +565,7 @@
                     <connections>
                         <segue destination="cEY-JY-E2Z" kind="relationship" relationship="viewControllers" id="5Zv-Um-mOP"/>
                         <segue destination="JNT-vT-maR" kind="relationship" relationship="viewControllers" id="Hlg-Lz-qmI"/>
-                        <segue destination="AHb-yn-AF4" kind="relationship" relationship="viewControllers" id="MGa-Wl-mne"/>
+                        <segue destination="KZ3-9P-Ekg" kind="relationship" relationship="viewControllers" id="MGa-Wl-mne"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W27-VX-ZmG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -567,6 +594,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iO4-ys-SZR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-542.02898550724638" y="825.66964285714278"/>
+        </scene>
+        <!--My List-->
+        <scene sceneID="wZc-Zm-Hnn">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KZ3-9P-Ekg" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My List" image="MyListIcon" id="Us9-mw-OVw">
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9o1-XI-hPJ">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="AHb-yn-AF4" kind="relationship" relationship="rootViewController" id="PCa-lf-ETB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sJV-H1-uJC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1069.5652173913045" y="825.66964285714278"/>
         </scene>
     </scenes>
     <resources>
