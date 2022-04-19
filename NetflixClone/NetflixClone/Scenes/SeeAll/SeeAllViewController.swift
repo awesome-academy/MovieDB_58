@@ -3,12 +3,12 @@ import UIKit
 final class SeeAllViewController: UIViewController {
     @IBOutlet private weak var viewTitle: UILabel?
     @IBOutlet private weak var collectionView: UICollectionView?
-    private var searchTitle: String = ""
+    var searchTitle: String = ""
 
     // TODO Update later
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewTitle?.text = "Trending"
+        viewTitle?.text = searchTitle
         // Do any additional setup after loading the view.
         setupCollectionView()
     }

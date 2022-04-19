@@ -1,21 +1,25 @@
 import UIKit
+import CoreData
 
 final class HomeTableViewController: UITableViewController {
     @IBOutlet private weak var tableHeaderImageView: UIImageView?
     @IBOutlet private weak var playButton: UIButton?
+    @IBOutlet weak var myListButton: UIButton?
     @IBOutlet private weak var tvShowButton: UIButton?
     @IBOutlet private weak var movieButton: UIButton?
     @IBOutlet private weak var categoriesButton: UIButton?
     @IBOutlet weak var headerTitle: UILabel?
     @IBOutlet weak var headerGenres: UILabel?
 
+    private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     private let sectionTitles = ["My List", "Trending", "Popular Movie", "Popular TV Show"]
     private var movieEnabled = true
     private var tvShowEnabled = true
     private var headerItemId: Int?
+    private var headerPosterPath: String?
     private var headerItemIsMovie: Bool?
-    private var headerInMyList = false
-    private var myList = [ListedItem]()
+    private var headerInMyList: Bool?
+    private var myList = [MyList]()
     private var trendingList = [ListedItem]()
     private var popularMovieList = [ListedItem]()
     private var popularTvshowList = [ListedItem]()
@@ -78,6 +82,10 @@ final class HomeTableViewController: UITableViewController {
             let group = DispatchGroup()
             // Start fetching
             group.enter()
+            self.fetchCoreDataMyList()
+            group.leave()
+
+            group.enter()
             apiRepo.getList(listType: .trending, mediaType: .all, viewController: self) { (listedArray: ListedItems) in
                 self.trendingList = [ListedItem]()
                 self.trendingList.append(contentsOf: listedArray.results)
@@ -100,9 +108,19 @@ final class HomeTableViewController: UITableViewController {
             // Update UI
             group.notify(queue: .main) {
                 self.configHeaderItem(apiRepo: apiRepo)
+                guard let headerInMyList = self.headerInMyList else { return }
+                self.myListButton?.imageView?.image = UIImage(systemName: headerInMyList ? "heart.fill" : "heart")
                 self.tableView.reloadData()
                 print("Fetching all media type data is done!")
             }
+        }
+    }
+
+    private func fetchCoreDataMyList() {
+        DispatchQueue.main.async { [weak self] in
+            let coreDataRepo = CoreDataRepository()
+            self?.myList = coreDataRepo.getAll()
+            self?.tableView.reloadData()
         }
     }
 
@@ -191,14 +209,16 @@ final class HomeTableViewController: UITableViewController {
         var headerGenresArray = [String]()
         // Header image
         DispatchQueue.global(qos: .utility).async { [weak self] in
-            guard let self = self else { return }
-            guard let imageURL = self.trendingList[0].posterPath else { return }
+            guard let self = self,
+                  let imageURL = self.trendingList[0].posterPath
+            else { return }
             apiRepo.getImage(url: imageURL) { (result: Result<Data, Error>) in
                 switch result {
                 case .success(let imageData):
                     if let image = UIImage(data: imageData) {
                         DispatchQueue.main.async {
                             self.tableHeaderImageView?.image = image
+                            self.headerPosterPath = imageURL
                         }
                     } else {
                         DispatchQueue.main.async {
@@ -217,6 +237,10 @@ final class HomeTableViewController: UITableViewController {
         headerGenresArray = getHeaderGenres()
         headerGenresString = headerGenresArray.joined(separator: " • ")
         headerGenres?.text = headerGenresString
+        guard let headerItemId = headerItemId else { return }
+        for item in myList where item.id == headerItemId {
+            headerInMyList = true
+        }
     }
 
     private func getHeaderGenres() -> [String] {
@@ -244,11 +268,7 @@ final class HomeTableViewController: UITableViewController {
 
     private func makeDimView() {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [
-            UIColor.black.cgColor,
-            UIColor.clear.cgColor,
-            UIColor.black.cgColor
-        ]
+        gradientLayer.colors = [UIColor.black.cgColor, UIColor.clear.cgColor, UIColor.black.cgColor]
         gradientLayer.frame = tableHeaderImageView?.bounds ?? CGRect()
         tableHeaderImageView?.layer.addSublayer(gradientLayer)
     }
@@ -269,23 +289,34 @@ final class HomeTableViewController: UITableViewController {
         cell.configDataHomeCollectionViewCell(idListTemp: idList, posterListTemp: posterPathList, isMovieListTemp: isMovieList)
     }
 
+    private func setContentForMyListCell(cell: HomeTableViewCell, array: [MyList]) {
+        let posterPathList = getPosterPathFromMyListArray(array: array)
+        let idList = getIdFromMyListArray(array: array)
+        let isMovieList = getIsMovieFromMyListArray(array: array)
+        cell.configDataHomeCollectionViewCell(idListTemp: idList, posterListTemp: posterPathList, isMovieListTemp: isMovieList)
+    }
+
     private func getIdFromArray(array: [ListedItem]) -> [Int] {
-        var idList = [Int]()
-        _ = array.map({ element in
-            idList.append(element.id)
-        })
-        return idList
+        return array.map { $0.id }
+    }
+
+    private func getIdFromMyListArray(array: [MyList]) -> [Int] {
+        return array.map { $0.id }
     }
 
     private func getPosterPathFromArray(array: [ListedItem]) -> [String] {
-        var posterPathList = [String]()
-        for element in array {
-            posterPathList.append(element.posterPath ?? "No value")
-        }
-        return posterPathList
+        return array.map { $0.posterPath ?? "" }
+    }
+
+    private func getPosterPathFromMyListArray(array: [MyList]) -> [String] {
+        return array.map { $0.posterPath ?? "" }
     }
 
     private func getIsMovieFromArray(array: [ListedItem]) -> [Bool] {
+        return array.map { $0.name == nil }
+    }
+
+    private func getIsMovieFromMyListArray(array: [MyList]) -> [Bool] {
         return array.map { $0.name == nil }
     }
 
@@ -305,7 +336,8 @@ final class HomeTableViewController: UITableViewController {
         if let userInfo = notification.userInfo?["userInfo"] as? [String: Any] {
             sectionTitle = userInfo["sectionTitle"] as? String ?? ""
         }
-        guard let seeAllVC = storyboard?.instantiateViewController(withIdentifier: "SeeAllViewController") else { return }
+        guard let seeAllVC = storyboard?.instantiateViewController(withIdentifier: "SeeAllViewController") as? SeeAllViewController else { return }
+        seeAllVC.searchTitle = sectionTitle
         navigationController?.pushViewController(seeAllVC, animated: true)
     }
 
@@ -323,35 +355,45 @@ final class HomeTableViewController: UITableViewController {
     }
 
     @IBAction private func addToMyListTapped(_ sender: UIButton) {
-        guard let image = UIImage(systemName: "heart.fill") else { return }
-
+        guard let context = self.context else { return }
+        let coreDataRepo = CoreDataRepository()
         if headerInMyList != true {
             headerInMyList = true
-            sender.setImage(image, for: .normal)
+            let myListItem = MyList(context: context)
+            myListItem.id = headerItemId ?? 0
+            myListItem.name = trendingList[0].name
+            myListItem.title = trendingList[0].title
+            myListItem.posterPath = headerPosterPath
+            myListItem.isMovie = headerItemIsMovie ?? false
+            coreDataRepo.add(myListObject: myListItem)
+
+            sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         } else {
             headerInMyList = false
+            let deleteObject = myList.filter { $0.id == headerItemId }
+            coreDataRepo.remove(myListObject: deleteObject[0])
             sender.setImage(UIImage(systemName: "heart"), for: .normal)
         }
+
+        fetchCoreDataMyList()
+    }
+
+    private func setButtonUI(isMovie: Bool, mediaType: MediaType) {
+        tvShowEnabled = isMovie
+        movieEnabled = !isMovie
+        tvShowButton?.titleLabel?.textColor = isMovie ? .lightGray : .white
+        movieButton?.titleLabel?.textColor = !isMovie ? .lightGray : .white
+        fetchRequiredMediaType(mediaType: mediaType)
+
+        tableView.reloadData()
     }
 
     @IBAction private func tvShowButtonTapped(_ sender: UIButton) {
-        tvShowEnabled = true
-        movieEnabled = false
-        tvShowButton?.titleLabel?.textColor = .white
-        movieButton?.titleLabel?.textColor = .lightGray
-        fetchRequiredMediaType(mediaType: .tvShow)
-
-        tableView.reloadData()
+        setButtonUI(isMovie: false, mediaType: .tvShow)
     }
 
     @IBAction private func movieButtonTapped(_ sender: UIButton) {
-        movieEnabled = true
-        tvShowEnabled = false
-        movieButton?.titleLabel?.textColor = .white
-        tvShowButton?.titleLabel?.textColor = .lightGray
-        fetchRequiredMediaType(mediaType: .movie)
-
-        tableView.reloadData()
+        setButtonUI(isMovie: true, mediaType: .movie)
     }
     @IBAction func categoriesButtonTapped(_ sender: UIButton) {
         guard let categoryVC = storyboard?.instantiateViewController(withIdentifier: "CategoryScreen") as? CategoryViewController else { return }
@@ -386,7 +428,7 @@ final class HomeTableViewController: UITableViewController {
         let sections: Sections = Sections(rawValue: indexPath.section) ?? .trending
         switch sections {
         case .myList:
-            setContentForCell(cell: cell, array: myList)
+            setContentForMyListCell(cell: cell, array: myList)
         case .trending:
             setContentForCell(cell: cell, array: trendingList)
         case .popularMovie:
