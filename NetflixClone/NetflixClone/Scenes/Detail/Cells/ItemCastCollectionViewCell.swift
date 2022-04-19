@@ -17,8 +17,6 @@ final class ItemCastCollectionViewCell: UICollectionViewCell, ReuseableView {
     }
 
     func configCastJobLabel(indexPath: IndexPath, directorName: String?) {
-        if indexPath.item != 0 {
-            cellCastJob?.isHidden = true
-        }
+        cellCastJob?.isHidden = indexPath.item != 0
     }
 }

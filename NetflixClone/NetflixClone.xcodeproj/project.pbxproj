@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DF3D5D38280D35FD00B4007A /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3D5D37280D35FD00B4007A /* Video.swift */; };
 		DF3D5D3C280D5FF400B4007A /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3D5D3B280D5FF400B4007A /* VideoView.swift */; };
+		DF3D5D3F280E3ABB00B4007A /* MyListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3D5D3E280E3ABB00B4007A /* MyListTableViewCell.swift */; };
 		DF3E284A280031BB006DC5B9 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3E2849280031BB006DC5B9 /* CategoryViewController.swift */; };
 		DF464BBA27FAD7A0004310C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF464BB927FAD7A0004310C8 /* AppDelegate.swift */; };
 		DF464BBC27FAD7A0004310C8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF464BBB27FAD7A0004310C8 /* SceneDelegate.swift */; };
@@ -68,6 +69,7 @@
 /* Begin PBXFileReference section */
 		DF3D5D37280D35FD00B4007A /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		DF3D5D3B280D5FF400B4007A /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
+		DF3D5D3E280E3ABB00B4007A /* MyListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListTableViewCell.swift; sourceTree = "<group>"; };
 		DF3E2849280031BB006DC5B9 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		DF464BB627FAD79F004310C8 /* NetflixClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetflixClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF464BB927FAD7A0004310C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +139,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF3D5D3D280E37A000B4007A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				DF3D5D3E280E3ABB00B4007A /* MyListTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		DF464BAD27FAD79F004310C8 = {
 			isa = PBXGroup;
 			children = (
@@ -273,7 +283,7 @@
 		DFE6E1C728044C4C0025D737 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				DFE6E1D82806D3640025D737 /* Cell */,
+				DFE6E1D82806D3640025D737 /* Cells */,
 				DF5A843C27FFEF6F00FFA85F /* SearchTableViewController.swift */,
 			);
 			path = Search;
@@ -290,6 +300,7 @@
 		DFE6E1C928044C580025D737 /* MyList */ = {
 			isa = PBXGroup;
 			children = (
+				DF3D5D3D280E37A000B4007A /* Cells */,
 				DF6E512427FBEE82001FF8D8 /* MyListTableViewController.swift */,
 			);
 			path = MyList;
@@ -339,14 +350,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		DFE6E1D82806D3640025D737 /* Cell */ = {
+		DFE6E1D82806D3640025D737 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				DFE6E1D92806D3850025D737 /* SearchTableViewCell.swift */,
 				DFE6E1DD2806FA8C0025D737 /* SearchSectionHeaderView.swift */,
 				DFE6E1DF2806FAA50025D737 /* SearchSectionHeaderView.xib */,
 			);
-			path = Cell;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		DFFD9DF32808FE1400079E85 /* Cells */ = {
@@ -493,6 +504,7 @@
 				DFBF496927FC231200140F00 /* ListedItem.swift in Sources */,
 				DF49F14427FE90FA00628E79 /* APIRepository.swift in Sources */,
 				DF49F14627FEDE3300628E79 /* HomeTableViewCell.swift in Sources */,
+				DF3D5D3F280E3ABB00B4007A /* MyListTableViewCell.swift in Sources */,
 				DFE6E1DA2806D3850025D737 /* SearchTableViewCell.swift in Sources */,
 				DF5A843D27FFEF6F00FFA85F /* SearchTableViewController.swift in Sources */,
 				DF5A843B27FFE19700FFA85F /* DetailTableViewController.swift in Sources */,

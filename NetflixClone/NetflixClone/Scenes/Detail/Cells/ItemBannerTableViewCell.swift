@@ -17,7 +17,6 @@ final class ItemBannerTableViewCell: UITableViewCell, ReuseableView {
     @IBOutlet weak var cellItemDescription: UILabel?
     @IBOutlet weak var cellSeemoreButton: UIButton?
 
-    private var isPlaying = true
     var playVideo: Bool?
     var videoId = ""
     var itemBannerCellDelegate: ItemBannerCellDelegate?
@@ -44,13 +43,13 @@ final class ItemBannerTableViewCell: UITableViewCell, ReuseableView {
                   let cellBanner = self.cellBanner
             else { return }
 
-            self.videoPlayerView?.playVideo(cellBanner: cellBanner, playVideo: playVideo, isPlaying: &self.isPlaying, videoId: self.videoId)
+            self.videoPlayerView?.playVideo(cellBanner: cellBanner, playVideo: playVideo, videoId: self.videoId)
         }
     }
 
     @IBAction func playTapped(_ sender: UIButton) {
         guard let cellBanner = self.cellBanner else { return }
-        videoPlayerView?.playButtonTapped(cellBanner: cellBanner, isPlaying: &self.isPlaying, videoId: self.videoId)
+        videoPlayerView?.playButtonTapped(cellBanner: cellBanner, videoId: videoId)
     }
 
     @IBAction func seeMoreTapped(_ sender: UIButton) {
