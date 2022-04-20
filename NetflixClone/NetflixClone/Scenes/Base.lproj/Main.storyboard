@@ -515,7 +515,7 @@
                                                 <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </buttonConfiguration>
                                             <connections>
-                                                <action selector="infoButtonTapped:" destination="JIH-SR-7qT" eventType="touchUpInside" id="tx3-aF-z14"/>
+                                                <action selector="infoTapped:" destination="JNT-vT-maR" eventType="touchUpInside" id="Ao8-yp-LQQ"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xAW-Fi-s3G">
@@ -526,7 +526,7 @@
                                                 <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </buttonConfiguration>
                                             <connections>
-                                                <action selector="remindButtonTapped:" destination="JIH-SR-7qT" eventType="touchUpInside" id="vuQ-9c-aLh"/>
+                                                <action selector="remindMeTapped:" destination="JNT-vT-maR" eventType="touchUpInside" id="bov-Dx-ylW"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rambo: Last Blood" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vja-da-Xo1">
@@ -576,6 +576,8 @@
                                     <outlet property="cellOverview" destination="6H0-ll-d2R" id="Qph-II-NMj"/>
                                     <outlet property="cellReleaseDate" destination="sR0-9X-n6f" id="SUK-GO-f22"/>
                                     <outlet property="cellTitle" destination="Vja-da-Xo1" id="5xz-xf-cxz"/>
+                                    <outlet property="infoButton" destination="NQj-Ai-hg9" id="21B-CU-yhf"/>
+                                    <outlet property="remindMeButton" destination="xAW-Fi-s3G" id="Qwt-gi-YaA"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
