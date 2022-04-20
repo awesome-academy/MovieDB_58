@@ -40,5 +40,5 @@ enum SectionTitle: String {
     case myList = "My List"
     case trending = "Trending"
     case popularMovie = "Popular Movie"
-    case popularTvShow = "Popular Tv Show"
+    case popularTvShow = "Popular TV Show"
 }
