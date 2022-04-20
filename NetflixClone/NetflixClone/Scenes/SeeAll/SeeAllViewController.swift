@@ -26,10 +26,6 @@ final class SeeAllViewController: UIViewController {
         collectionView.register(SeeAllCollectionViewCell.self, forCellWithReuseIdentifier: SeeAllCollectionViewCell.identifier)
         collectionView.showsVerticalScrollIndicator = false
     }
-
-    private func setContentForCell(cell: SeeAllCollectionViewCell, indexPath: IndexPath) {
-        cell.cellImage?.image = UIImage(named: "Image")
-    }
 }
 
 extension SeeAllViewController: UICollectionViewDataSource {
@@ -41,7 +37,7 @@ extension SeeAllViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "seeAllCell", for: indexPath) as? SeeAllCollectionViewCell else {
             return UICollectionViewCell()
         }
-        setContentForCell(cell: cell, indexPath: indexPath)
+        cell.configUICell(indexPath: indexPath, posterPath: listItem[indexPath.row].posterPath ?? "")
         return cell
     }
 }
