@@ -15,6 +15,7 @@ protocol APIRepositoryType {
     func getCreditCrew(mediaType: CreditMediaType, id: Int, completion: @escaping (Result<Crews, Error>) -> Void)
     func getSimilarItem(mediaType: CreditMediaType, id: Int, completion: @escaping (Result<ListedItems, Error>) -> Void)
     func getVideo(mediaType: CreditMediaType, id: Int, completion: @escaping (Result<Videos, Error>) -> Void)
+    func getComingSoonMovie(mediaType: CreditMediaType, page: Int, completion: @escaping (Result<ListedItems, Error>) -> Void)
 }
 
 class APIRepository: APIRepositoryType {
@@ -165,6 +166,19 @@ class APIRepository: APIRepositoryType {
         let endPoint = EndPoint.video(mediaType: mediaType, id: id)
 
         APICaller.shared.getJSON(endPoint: endPoint) { (result: Result<Videos, Error>) in
+            switch result {
+            case .success(let success):
+                completion(.success(success))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func getComingSoonMovie(mediaType: CreditMediaType, page: Int, completion: @escaping (Result<ListedItems, Error>) -> Void) {
+        let endPoint = EndPoint.comingSoon(mediaType: mediaType, page: page)
+
+        APICaller.shared.getJSON(endPoint: endPoint) { (result: Result<ListedItems, Error>) in
             switch result {
             case .success(let success):
                 completion(.success(success))
