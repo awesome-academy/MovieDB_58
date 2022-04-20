@@ -12,7 +12,7 @@ final class SectionHeaderCell: UITableViewCell, ReuseableView {
     }
     @IBAction private func seeAllTapped(_ sender: Any) {
         let notiName = Notification.Name(rawValue: "com.Turacle.seeAll")
-        let userInfo = ["userInfo": ["sectionTitle": sectionTitle]]
+        let userInfo = ["userInfo": ["sectionTitle": sectionTitle?.text]]
         NotificationCenter.default.post(name: notiName, object: nil, userInfo: userInfo)
     }
 }

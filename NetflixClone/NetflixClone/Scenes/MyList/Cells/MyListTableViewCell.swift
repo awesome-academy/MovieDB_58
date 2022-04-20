@@ -20,7 +20,13 @@ final class MyListTableViewCell: UITableViewCell, ReuseableView {
             return
         }
         cellImage.layer.cornerRadius = 5
+        self.selectionStyle = .none
         self.backgroundColor = .clear
+    }
+
+    func setContentForCell(cell: MyListTableViewCell, indexPath: IndexPath, array: [MyList]) {
+        cell.cellLabel?.text = array[indexPath.row].name ?? array[indexPath.row].title
+        cell.cellImage?.setImageByUrl(url: array[indexPath.row].posterPath ?? "")
     }
 
 }

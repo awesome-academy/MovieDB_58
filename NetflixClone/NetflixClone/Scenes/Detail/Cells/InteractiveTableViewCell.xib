@@ -27,6 +27,9 @@
                                     <fontDescription key="titleFontDescription" type="system" pointSize="9"/>
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="myListButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dPD-Bk-94R"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpc-6R-K8P">
                                 <rect key="frame" x="89" y="0.0" width="56" height="50"/>

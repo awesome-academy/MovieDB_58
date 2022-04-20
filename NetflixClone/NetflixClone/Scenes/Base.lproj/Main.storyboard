@@ -247,6 +247,7 @@
                         <outlet property="headerGenres" destination="aVw-AH-h0s" id="v7c-PH-qff"/>
                         <outlet property="headerTitle" destination="Wmu-dx-Wox" id="IAv-Dv-uxE"/>
                         <outlet property="movieButton" destination="5Wd-5B-s5h" id="JtJ-G8-aSu"/>
+                        <outlet property="myListButton" destination="QF6-F4-nrn" id="eiR-bV-fEa"/>
                         <outlet property="playButton" destination="fgW-DI-ec8" id="dkm-Hs-Dl0"/>
                         <outlet property="tableHeaderImageView" destination="Xrr-ZN-eV3" id="uOE-36-5h6"/>
                         <outlet property="tvShowButton" destination="vX0-kj-xhy" id="vzC-hF-qnO"/>

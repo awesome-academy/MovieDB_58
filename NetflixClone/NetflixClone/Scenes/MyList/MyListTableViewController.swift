@@ -1,9 +1,13 @@
 import UIKit
 
 final class MyListTableViewController: UITableViewController {
+    private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+    private var myListArray: [MyList]?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationBar()
+        fetchDataFromCoreData()
     }
 
     private func setUpNavigationBar() {
@@ -25,6 +29,11 @@ final class MyListTableViewController: UITableViewController {
         navigationItem.backButtonTitle = ""
     }
 
+    private func fetchDataFromCoreData() {
+        let coreDataRepo = CoreDataRepository()
+        myListArray = coreDataRepo.getAll()
+    }
+
     @objc private func searchButtonTapped() {
         guard let searchVC = storyboard?.instantiateViewController(withIdentifier: "SearchTableViewController") else { return }
         navigationController?.pushViewController(searchVC, animated: true)
@@ -32,12 +41,15 @@ final class MyListTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return myListArray?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MyListTableViewCell.identifier, for: indexPath) as? MyListTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MyListTableViewCell.identifier, for: indexPath) as? MyListTableViewCell,
+              let myListArray = myListArray
         else { return UITableViewCell() }
+
+        cell.setContentForCell(cell: cell, indexPath: indexPath, array: myListArray)
 
         return cell
     }

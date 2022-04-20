@@ -11,14 +11,17 @@ final class DetailTableViewController: UITableViewController {
     private var itemId: Int = 0
     private var itemIsMovie = false
     private var itemOverview = ""
+    private var itemPosterPath = ""
     private var casts = [Cast]()
     private var crews = [Crew]()
     private var directorName: String?
     private var directorPosterPath: String?
+    private var myList = [MyList]()
     private var inMyList = false
     private var moreLikeThisList = [ListedItem]()
     private var videoList = [Video]()
     private var playVideo: Bool?
+    private let coreDataRepo = CoreDataRepository()
 
     init(id: Int, isMovie: Bool, playVideo: Bool) {
         super.init(nibName: nil, bundle: nil)
@@ -103,8 +106,13 @@ final class DetailTableViewController: UITableViewController {
                 }
                 group.leave()
             }
+
+            group.enter()
+            getInMyList()
+            group.leave()
             // Update UI
             group.notify(queue: .main) {
+                self.getInMyList()
                 self.tableView.reloadData()
             }
         }
@@ -117,6 +125,7 @@ final class DetailTableViewController: UITableViewController {
         itemRunTime = tvDetail.episodeRunTime?.first ?? 0
         itemGenres = tvDetail.genres ?? [Genre]()
         itemOverview = tvDetail.overview ?? "No overview"
+        itemPosterPath = tvDetail.posterPath ?? ""
     }
 
     private func setContentForMovieDetailValue(movieDetail: MovieDetail) {
@@ -127,6 +136,7 @@ final class DetailTableViewController: UITableViewController {
         self.itemRunTime = movieDetail.runtime ?? 0
         self.itemGenres = movieDetail.genres ?? [Genre]()
         self.itemOverview = movieDetail.overview ?? "No overview"
+        itemPosterPath = movieDetail.posterPath ?? ""
     }
 
     private func fetchCastNCrew(mediaType: CreditMediaType, apiRepo: APIRepository) {
@@ -154,33 +164,13 @@ final class DetailTableViewController: UITableViewController {
         }
     }
 
+    private func getInMyList() {
+        inMyList = coreDataRepo.objectInMyList(id: itemId)
+    }
+
     private func getItemGenres() {
         let genreNames = itemGenres.map { $0.name ?? "No genre" }
         itemGenresText += genreNames.joined(separator: ", ")
-    }
-
-    private func setBannerImage(cell: ItemBannerTableViewCell) {
-        DispatchQueue.global(qos: .utility).async { [weak self] in
-            guard let self = self else { return }
-            let apiRepo = APIRepository()
-            let imageURL = self.itemBackDrop
-            apiRepo.getImage(url: imageURL) { (result: Result<Data, Error>) in
-                switch result {
-                case .success(let imageData):
-                    if let image = UIImage(data: imageData) {
-                        DispatchQueue.main.async {
-                            cell.cellBanner?.image = image
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            cell.cellBanner?.image = UIImage(named: "placeHolder")
-                        }
-                    }
-                case .failure(let error):
-                    self.popupErrorCategory(error: error, viewController: self)
-                }
-            }
-        }
     }
 
     private func getItemTrailerKey(array: [Video]) -> String {
@@ -205,9 +195,8 @@ final class DetailTableViewController: UITableViewController {
         cell.cellItemGenres?.text = itemGenresText
         cell.cellItemDescription?.text = itemOverview
         cell.cellItemGenres?.text = itemGenresText
-        setBannerImage(cell: cell)
-        cell.videoId = getItemTrailerKey(array: videoList)
-        cell.playVideo = playVideo ?? false
+        guard let playVideo = playVideo else { return }
+        cell.videoPlayerView.prepare(videoId: getItemTrailerKey(array: videoList), isAutoPlay: playVideo)
     }
 
     private func getCastPosterPathFromArray(array: [Cast]) -> [String] {
@@ -323,6 +312,7 @@ final class DetailTableViewController: UITableViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: InteractiveTableViewCell.identifier, for: indexPath) as? InteractiveTableViewCell else {
                 return UITableViewCell()
             }
+            cell.setContentForInteractiveCell(cell: cell, indexPath: indexPath, id: itemId, name: itemName, posterPath: itemPosterPath, isMovie: itemIsMovie, inMyList: inMyList)
             return cell
         case .moreLikeThis:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MoreLikeThisTableViewCell.identifier, for: indexPath) as? MoreLikeThisTableViewCell else {

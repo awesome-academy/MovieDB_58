@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,18 +19,9 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUh-Mx-klu" customClass="WKYTPlayerView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="188"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeHolder" translatesAutoresizingMaskIntoConstraints="NO" id="6oG-V0-Q2E">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="188"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="6oG-V0-Q2E" secondAttribute="trailing" id="3Jb-nM-eh0"/>
                             <constraint firstAttribute="height" constant="188" id="9R6-K3-Smq"/>
-                            <constraint firstItem="6oG-V0-Q2E" firstAttribute="leading" secondItem="HUh-Mx-klu" secondAttribute="leading" id="I1l-bq-Wbx"/>
-                            <constraint firstItem="6oG-V0-Q2E" firstAttribute="top" secondItem="HUh-Mx-klu" secondAttribute="top" id="QxO-9h-lfT"/>
-                            <constraint firstAttribute="bottom" secondItem="6oG-V0-Q2E" secondAttribute="bottom" id="aJd-2s-xmD"/>
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="fillEqually" spacing="-50" translatesAutoresizingMaskIntoConstraints="NO" id="eTN-Se-TY2">
@@ -142,7 +132,6 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="cellBanner" destination="6oG-V0-Q2E" id="x4m-hz-s0l"/>
                 <outlet property="cellItemDescription" destination="sT3-cr-bxT" id="WE8-PT-ANJ"/>
                 <outlet property="cellItemDuration" destination="RPZ-5F-6Ss" id="2Q3-Vz-o1Y"/>
                 <outlet property="cellItemGenres" destination="zve-rk-cya" id="UJD-Dy-t4N"/>
@@ -151,16 +140,12 @@
                 <outlet property="cellItemYear" destination="HCM-w5-Y2k" id="xXW-NU-j6h"/>
                 <outlet property="cellPlayButton" destination="IAX-HO-xz6" id="EKs-Oi-AkM"/>
                 <outlet property="cellSeemoreButton" destination="KfL-zF-aCs" id="qWu-pL-NYd"/>
-                <outlet property="videoPlayerView" destination="HUh-Mx-klu" id="Vzn-kK-u1f"/>
+                <outlet property="playerView" destination="HUh-Mx-klu" id="5hp-sj-jCk"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="215.29017857142856"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="arrowtriangle.right.fill" catalog="system" width="128" height="113"/>
-        <image name="placeHolder" width="1200" height="800"/>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>
