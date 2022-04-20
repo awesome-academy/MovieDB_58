@@ -63,5 +63,6 @@ final class InteractiveTableViewCell: UITableViewCell, ReuseableView {
             coreDataRepo.remove(myListObject: deleteObject[0])
             sender.setImage(UIImage(systemName: "heart"), for: .normal)
         }
+        NotificationCenter.default.post(name: NSNotification.Name.myListButtonTappedNotiName, object: nil)
     }
 }

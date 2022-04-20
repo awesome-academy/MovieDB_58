@@ -35,3 +35,10 @@ enum DetailSection: Int {
     case interact = 2
     case moreLikeThis = 3
 }
+
+enum SectionTitle: String {
+    case myList = "My List"
+    case trending = "Trending"
+    case popularMovie = "Popular Movie"
+    case popularTvShow = "Popular Tv Show"
+}
