@@ -42,6 +42,14 @@ extension SeeAllViewController: UICollectionViewDataSource {
     }
 }
 
+extension SeeAllViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let detailVC = DetailTableViewController(id: listItem[indexPath.item].id, isMovie: listItem[indexPath.item].name == nil, playVideo: false)
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
+
 extension SeeAllViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = view.frame.size.width / 3.2
