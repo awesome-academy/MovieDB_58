@@ -119,6 +119,7 @@ final class HomeTableViewController: UITableViewController {
     private func fetchCoreDataMyList() {
         DispatchQueue.main.async { [weak self] in
             let coreDataRepo = CoreDataRepository()
+            self?.myList = [MyList]()
             self?.myList = coreDataRepo.getAll()
             self?.tableView.reloadData()
         }
@@ -280,6 +281,7 @@ final class HomeTableViewController: UITableViewController {
     private func createObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(itemTapped(_:)), name: Notification.Name.itemTappedNotiName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(seeAllTapped(_:)), name: Notification.Name.seeAllTappedNotiName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(myListTapped), name: Notification.Name.myListButtonTappedNotiName, object: nil)
     }
 
     private func setContentForCell(cell: HomeTableViewCell, array: [ListedItem]) {
@@ -336,14 +338,32 @@ final class HomeTableViewController: UITableViewController {
         if let userInfo = notification.userInfo?["userInfo"] as? [String: Any] {
             sectionTitle = userInfo["sectionTitle"] as? String ?? ""
         }
-        guard let seeAllVC = storyboard?.instantiateViewController(withIdentifier: "SeeAllViewController") as? SeeAllViewController else { return }
+        guard let seeAllVC = storyboard?.instantiateViewController(withIdentifier: "SeeAllViewController") as? SeeAllViewController,
+                let sectionTitles: SectionTitle = SectionTitle(rawValue: sectionTitle)
+        else { return }
         seeAllVC.searchTitle = sectionTitle
+        switch sectionTitles {
+        case .myList:
+            guard let myListVC = storyboard?.instantiateViewController(withIdentifier: "MyListTableViewController") as? MyListTableViewController else { return }
+            navigationController?.pushViewController(myListVC, animated: true)
+            return
+        case .trending:
+            seeAllVC.listItem = trendingList
+        case .popularMovie:
+            seeAllVC.listItem = popularMovieList
+        case .popularTvShow:
+            seeAllVC.listItem = popularTvshowList
+        }
         navigationController?.pushViewController(seeAllVC, animated: true)
     }
 
     @objc private func searchButtonTapped() {
         guard let searchVC = storyboard?.instantiateViewController(withIdentifier: "SearchTableViewController") else { return }
         navigationController?.pushViewController(searchVC, animated: true)
+    }
+
+    @objc private func myListTapped() {
+        fetchCoreDataMyList()
     }
 
     @IBAction private func infoButtonTapped(_ sender: UIButton) {
@@ -374,13 +394,13 @@ final class HomeTableViewController: UITableViewController {
             coreDataRepo.remove(myListObject: deleteObject[0])
             sender.setImage(UIImage(systemName: "heart"), for: .normal)
         }
-
+        NotificationCenter.default.post(name: NSNotification.Name.myListButtonTappedNotiName, object: nil)
         fetchCoreDataMyList()
     }
 
     private func setButtonUI(isMovie: Bool, mediaType: MediaType) {
-        tvShowEnabled = isMovie
-        movieEnabled = !isMovie
+        tvShowEnabled = !isMovie
+        movieEnabled = isMovie
         tvShowButton?.titleLabel?.textColor = isMovie ? .lightGray : .white
         movieButton?.titleLabel?.textColor = !isMovie ? .lightGray : .white
         fetchRequiredMediaType(mediaType: mediaType)

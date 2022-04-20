@@ -3,13 +3,15 @@ import UIKit
 final class SeeAllViewController: UIViewController {
     @IBOutlet private weak var viewTitle: UILabel?
     @IBOutlet private weak var collectionView: UICollectionView?
-    var searchTitle: String = ""
 
-    // TODO Update later
+    var searchTitle: String = ""
+    var listItem = [ListedItem]()
+    private let apiRepo = APIRepository()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewTitle?.text = searchTitle
         // Do any additional setup after loading the view.
+        viewTitle?.text = searchTitle
         setupCollectionView()
     }
 
@@ -31,13 +33,8 @@ final class SeeAllViewController: UIViewController {
 }
 
 extension SeeAllViewController: UICollectionViewDataSource {
-
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
-    }
-    // TODO Update later
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return listItem.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
