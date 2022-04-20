@@ -65,15 +65,6 @@ final class SearchTableViewController: UITableViewController {
         }
     }
 
-    private func createAlert() {
-        let alert = UIAlertController(title: "Error", message: "End of List!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
-            guard let self = self else { return }
-            self.tableView.reloadData()
-        }))
-        present(alert, animated: true)
-    }
-
     private func popupError(error: Error, viewController: UITableViewController) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
