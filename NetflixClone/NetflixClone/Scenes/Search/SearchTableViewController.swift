@@ -83,12 +83,12 @@ final class SearchTableViewController: UITableViewController {
         cell.cellPlayButton?.tag = indexPath.row
     }
 
-    private func itemTapped(id: Int, isMovie: Bool) {
+    func itemTapped(id: Int, isMovie: Bool) {
         let detailVC = DetailTableViewController(id: id, isMovie: isMovie, playVideo: false)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 
-    private func loadMoreData() {
+    func loadMoreData() {
         if !keepFetching {
             keepFetching.toggle()
             DispatchQueue.global(qos: .utility).async { [weak self] in

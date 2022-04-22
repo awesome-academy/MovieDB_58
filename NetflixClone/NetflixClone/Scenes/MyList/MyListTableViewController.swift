@@ -31,7 +31,7 @@ final class MyListTableViewController: UITableViewController {
         navigationItem.backButtonTitle = ""
     }
 
-    private func fetchDataFromCoreData() {
+    func fetchDataFromCoreData() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.myListArray = self.coreDataRepo.getAll()
@@ -43,11 +43,11 @@ final class MyListTableViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(myListTapped), name: Notification.Name.myListButtonTappedNotiName, object: nil)
     }
 
-    @objc private func myListTapped() {
+    @objc func myListTapped() {
         fetchDataFromCoreData()
     }
 
-    @objc private func searchButtonTapped() {
+    @objc func searchButtonTapped() {
         guard let searchVC = storyboard?.instantiateViewController(withIdentifier: "SearchTableViewController") else { return }
         navigationController?.pushViewController(searchVC, animated: true)
     }

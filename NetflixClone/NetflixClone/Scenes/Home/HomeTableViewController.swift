@@ -232,7 +232,7 @@ final class HomeTableViewController: UITableViewController {
             }
         }
         // Header Info
-        headerItemId = trendingList[0].id
+        headerItemId = trendingList.first?.id
         headerItemIsMovie = trendingList[0].title != nil ? true : false
         headerTitle?.text = trendingList[0].name?.uppercased() ?? trendingList[0].title?.uppercased()
         headerGenresArray = getHeaderGenres()
@@ -333,7 +333,7 @@ final class HomeTableViewController: UITableViewController {
         navigationController?.pushViewController(detailVC, animated: true)
     }
 
-    @objc private func seeAllTapped(_ notification: Notification) {
+    @objc func seeAllTapped(_ notification: Notification) {
         var sectionTitle: String = ""
         if let userInfo = notification.userInfo?["userInfo"] as? [String: Any] {
             sectionTitle = userInfo["sectionTitle"] as? String ?? ""
@@ -357,7 +357,7 @@ final class HomeTableViewController: UITableViewController {
         navigationController?.pushViewController(seeAllVC, animated: true)
     }
 
-    @objc private func searchButtonTapped() {
+    @objc func searchButtonTapped() {
         guard let searchVC = storyboard?.instantiateViewController(withIdentifier: "SearchTableViewController") else { return }
         navigationController?.pushViewController(searchVC, animated: true)
     }
@@ -366,7 +366,7 @@ final class HomeTableViewController: UITableViewController {
         fetchCoreDataMyList()
     }
 
-    @IBAction private func infoButtonTapped(_ sender: UIButton) {
+    @IBAction func infoButtonTapped(_ sender: UIButton) {
         guard let headerItemId = headerItemId else { return }
         guard let headerItemIsMovie = headerItemIsMovie else { return }
 
@@ -374,15 +374,15 @@ final class HomeTableViewController: UITableViewController {
         navigationController?.pushViewController(detailVC, animated: true)
     }
 
-    @IBAction private func addToMyListTapped(_ sender: UIButton) {
+    @IBAction func addToMyListTapped(_ sender: UIButton) {
         guard let context = self.context else { return }
         let coreDataRepo = CoreDataRepository()
         if headerInMyList != true {
             headerInMyList = true
             let myListItem = MyList(context: context)
             myListItem.id = headerItemId ?? 0
-            myListItem.name = trendingList[0].name
-            myListItem.title = trendingList[0].title
+            myListItem.name = trendingList.first?.name
+            myListItem.title = trendingList.first?.title
             myListItem.posterPath = headerPosterPath
             myListItem.isMovie = headerItemIsMovie ?? false
             coreDataRepo.add(myListObject: myListItem)
@@ -408,11 +408,11 @@ final class HomeTableViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    @IBAction private func tvShowButtonTapped(_ sender: UIButton) {
+    @IBAction func tvShowButtonTapped(_ sender: UIButton) {
         setButtonUI(isMovie: false, mediaType: .tvShow)
     }
 
-    @IBAction private func movieButtonTapped(_ sender: UIButton) {
+    @IBAction func movieButtonTapped(_ sender: UIButton) {
         setButtonUI(isMovie: true, mediaType: .movie)
     }
     @IBAction func categoriesButtonTapped(_ sender: UIButton) {

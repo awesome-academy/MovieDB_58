@@ -74,7 +74,7 @@
         <!--Home Table View Controller-->
         <scene sceneID="zN0-wz-loR">
             <objects>
-                <tableViewController id="44k-I4-y9S" customClass="HomeTableViewController" customModule="NetflixClone" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="HomeTableViewController" id="44k-I4-y9S" customClass="HomeTableViewController" customModule="NetflixClone" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="Bhe-71-nBY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -464,7 +464,7 @@
         <!--Coming Soon Table View Controller-->
         <scene sceneID="auf-KM-n9g">
             <objects>
-                <tableViewController id="JNT-vT-maR" customClass="ComingSoonTableViewController" customModule="NetflixClone" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ComingSoonTableViewController" id="JNT-vT-maR" customClass="ComingSoonTableViewController" customModule="NetflixClone" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="06n-5c-hdn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

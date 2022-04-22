@@ -179,7 +179,7 @@ final class DetailTableViewController: UITableViewController {
         return trailerKey
     }
 
-    private func setContentForItemBannerCell(cell: ItemBannerTableViewCell) {
+    func setContentForItemBannerCell(cell: ItemBannerTableViewCell) {
         cell.itemBannerCellDelegate = self
         if itemBackDrop.isEmpty {
             tableView.reloadData()
@@ -264,7 +264,7 @@ final class DetailTableViewController: UITableViewController {
         return isMovieList
     }
 
-    private func setContentForCastCell(cell: ItemCastTableViewCell, castArray: [Cast]) {
+    func setContentForCastCell(cell: ItemCastTableViewCell, castArray: [Cast]) {
         let castProfilePathList = getCastPosterPathFromArray(array: castArray)
         let castNameList = getCastNameFromArray(array: castArray)
         getDirectorInfo(array: crews)
@@ -272,7 +272,7 @@ final class DetailTableViewController: UITableViewController {
         cell.configDataItemCastCollectionViewCell(profilePathList: castProfilePathList, castNameList: castNameList, directorProfilePathList: directorPosterPath, directorName: directorName)
     }
 
-    private func setContentForMoreLikeThisCell(cell: MoreLikeThisTableViewCell, moreLikeThisArray: [ListedItem]) {
+    func setContentForMoreLikeThisCell(cell: MoreLikeThisTableViewCell, moreLikeThisArray: [ListedItem]) {
         let moreLikeThisPoterList = getMoreLikeThisPosterFromArray(array: moreLikeThisArray)
         let moreLikeThisIdList = getMoreLikeThisIdFromArray(array: moreLikeThisArray)
         let moreLikeThisIsMovieList = getMoreLikeThisIsMovieFromArray(array: moreLikeThisArray)

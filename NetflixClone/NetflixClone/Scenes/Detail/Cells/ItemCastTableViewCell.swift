@@ -47,7 +47,7 @@ final class ItemCastTableViewCell: UITableViewCell, ReuseableView {
         self.castProfilePaths = profilePathList
     }
 
-    private func setContentForCell(cell: ItemCastCollectionViewCell, indexPath: IndexPath) {
+    func setContentForCell(cell: ItemCastCollectionViewCell, indexPath: IndexPath) {
         cell.configCastJobLabel(indexPath: indexPath, directorName: directorName)
         if indexPath.item == 0 && directorName != nil {
             cell.cellCastName?.text = directorName

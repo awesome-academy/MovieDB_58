@@ -52,7 +52,7 @@ final class ComingSoonTableViewController: UITableViewController {
         }
     }
 
-    private func loadMoreData() {
+    func loadMoreData() {
         if !keepFetching {
             keepFetching.toggle()
             DispatchQueue.global(qos: .utility).async { [weak self] in
@@ -65,7 +65,7 @@ final class ComingSoonTableViewController: UITableViewController {
         }
     }
 
-    @IBAction private func remindMeTapped(_ sender: UIButton) {
+    @IBAction func remindMeTapped(_ sender: UIButton) {
         guard let releaseDate = comingSoonList[sender.tag].releaseDate else { return }
         let alert = UIAlertController(title: "Set a reminder on \(releaseDate)?", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
@@ -83,7 +83,7 @@ final class ComingSoonTableViewController: UITableViewController {
         present(alert, animated: true)
     }
 
-    @IBAction private func infoTapped(_ sender: UIButton) {
+    @IBAction func infoTapped(_ sender: UIButton) {
         let detailVC = DetailTableViewController(id: comingSoonList[sender.tag].id, isMovie: true, playVideo: false)
         navigationController?.pushViewController(detailVC, animated: true)
     }
